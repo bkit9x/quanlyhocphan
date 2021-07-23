@@ -3,70 +3,58 @@ class sinhVienModel extends DB
 {
     public function index() {
         $arr = array();
-        $result = $this->query("SELECT `mahocphan`, `tenhocphan`, `sotinchi`, `hocphantienquyet` as mahocphantienquyet FROM `hocphan`;");
+        $result = $this->query("SELECT `sv`.`hoten` as `sinhvien`, `sv`.`taikhoan` as `idsinhvien`, `gv`.`hoten` as `giaovien`, `gv`.`taikhoan` as `idgiaovien` FROM `chunhiem`, `taikhoan` as `sv`, `taikhoan` as `gv` WHERE `chunhiem`.`idsinhvien` = `sv`.`taikhoan` AND `chunhiem`.`idgiaovien` = `gv`.`taikhoan`;");
         if ($result && $result->num_rows > 0)
-        {
             while ($row = $result->fetch_assoc())
-            {
-                if($row['mahocphantienquyet'] != NULL)
-                {
-                    $hocphantienquyet = $this->query("SELECT `tenhocphan` FROM `hocphan` WHERE `mahocphan` = '".$row['mahocphantienquyet']."';");
-                    if ($hocphantienquyet && $hocphantienquyet->num_rows > 0) {
-                        $row['tenhocphantienquyet'] = $hocphantienquyet->fetch_assoc()['tenhocphan'];
-                    }
-                }
-                else
-                    $row['tenhocphantienquyet'] = NULL;
-
                 $arr[] = $row;
-            }
-        }
         return $arr;
     }
 
     public function them(){
-        if (isset($_POST['mahocphan']) && isset($_POST['tenhocphan']) && isset($_POST['sotinchi']) && isset($_POST['hocphantienquyet']))
+        if (isset($_POST['giaovien']) && isset($_POST['sinhvien']))
         {
-            $mahocphan = addslashes($_POST['mahocphan']);
-            $tenhocphan = addslashes($_POST['tenhocphan']);
-            $sotinchi = addslashes($_POST['sotinchi']);
-            $hocphantienquyet = addslashes($_POST['hocphantienquyet']);
-            $hocphantienquyet = $hocphantienquyet == "NULL" ? "NULL" : "'".$hocphantienquyet."'";
-
-            $result = $this->query("INSERT INTO `hocphan` (`mahocphan`, `tenhocphan`, `sotinchi`, `hocphantienquyet`) VALUES ('$mahocphan', '$tenhocphan', '$sotinchi', $hocphantienquyet);");
+            $giaovien = addslashes($_POST['giaovien']);
+            $sql = "INSERT INTO `chunhiem` (`idgiaovien`, `idsinhvien`) VALUES ";
+            foreach($_POST['sinhvien'] as $sv){
+                $sinhvien = addslashes($sv);
+                $sql .= "('$giaovien', '$sinhvien'),";
+            }
+            $result = $this->query(rtrim($sql, ","));
             if ($result)
-                header("Location: /index.php?url=hocphan/index&msg=themthanhcong");
+                header("Location: /index.php?url=sinhvien/index&msg=themthanhcong&id=".$idcaytientrinh);
             else
-                header("Location: /index.php?url=hocphan/index&msg=themloi");
+                header("Location: /index.php?url=sinhvien/index&msg=themloi&id=".$idcaytientrinh);
         }
     }
-
-    public function sua(){
-        if (isset($_POST['sua_mahocphan']) && isset($_POST['sua_mahocphan_old']) && isset($_POST['sua_tenhocphan']) && isset($_POST['sua_sotinchi']))
-        {
-            $mahocphan = addslashes($_POST['sua_mahocphan']);
-            $mahocphan_old = addslashes($_POST['sua_mahocphan_old']);
-            $tenhocphan = addslashes($_POST['sua_tenhocphan']);
-            $sotinchi = addslashes($_POST['sua_sotinchi']);
-            $hocphantienquyet = addslashes($_POST['sua_hocphantienquyet']);
-            $hocphantienquyet = $hocphantienquyet == "NULL" ? "NULL" : "'".$hocphantienquyet."'";
-            $result = $this->query("UPDATE `hocphan` SET `mahocphan` = '$mahocphan', `tenhocphan` = '$tenhocphan', `sotinchi` = '$sotinchi', `hocphantienquyet` = $hocphantienquyet WHERE `hocphan`.`mahocphan` = '$mahocphan_old'");
-            if ($result)
-                header("Location: /index.php?url=hocphan/index&msg=suathanhcong");
-            else
-                header("Location: /index.php?url=hocphan/index&msg=sualoi");
-        }
-    }
-
     public function xoa(){
-        if (isset($_POST['xoa_mahocphan']))
+        if (isset($_POST['xoa_idgiaovien']) && isset($_POST['xoa_idsinhvien']))
         {
-            $mahocphan = addslashes($_POST['xoa_mahocphan']);
-            $result = $this->query("DELETE FROM `hocphan` WHERE `hocphan`.`mahocphan` = '$mahocphan'");
+            $giaovien = addslashes($_POST['xoa_idgiaovien']);
+            $sinhvien = addslashes($_POST['xoa_idsinhvien']);
+            $result = $this->query("DELETE FROM `chunhiem` WHERE `chunhiem`.`idsinhvien` = '$sinhvien' AND `chunhiem`.`idgiaovien` = '$giaovien'");
             if ($result)
-                header("Location: /index.php?url=hocphan/index&msg=xoathanhcong");
+                header("Location: /index.php?url=sinhvien/index&msg=xoathanhcong");
             else
-                header("Location: /index.php?url=hocphan/index&msg=xoaloi");
+                header("Location: /index.php?url=sinhvien/index&msg=xoaloi");
         }
     }
+
+    public function danhsachsinhvien() {
+        $arr = array();
+        $result = $this->query("SELECT `taikhoan`, `hoten` FROM `taikhoan` WHERE `loaitaikhoan` = '3'");
+        if ($result && $result->num_rows > 0)
+            while ($row = $result->fetch_assoc())
+                $arr[] = $row;
+        return $arr;
+    }
+
+    public function danhsachgiaovien() {
+        $arr = array();
+        $result = $this->query("SELECT `taikhoan`, `hoten` FROM `taikhoan` WHERE `loaitaikhoan` = '2'");
+        if ($result && $result->num_rows > 0)
+            while ($row = $result->fetch_assoc())
+                $arr[] = $row;
+        return $arr;
+    }
+
 }

@@ -9,15 +9,13 @@ class sinhvien extends Controller
     }
     public function index() {
         $model = $this->model("sinhVienModel")->index();
-        $this->view("sinhvien/index", ["list"=>$model], ["title" => "Quản lý học phần", ["link"=>"index.php?url=sinhvien/index", "title"=>"Học phần"]]);
+        $danhsachsinhvien = $this->model("sinhVienModel")->danhsachsinhvien();
+        $danhsachgiaovien = $this->model("sinhVienModel")->danhsachgiaovien();
+        $this->view("sinhvien/index", ["list"=>$model, "sinhvien"=>$danhsachsinhvien, "giaovien" => $danhsachgiaovien], ["title" => "Quản lý sinh viên", ["link"=>"index.php?url=sinhvien/index", "title"=>"Sinh viên"]]);
     }
 
     public function them() {
         $this->model("sinhVienModel")->them();
-    }
-
-    public function sua() {
-        $this->model("sinhVienModel")->sua();
     }
     public function xoa() {
         $this->model("sinhVienModel")->xoa();

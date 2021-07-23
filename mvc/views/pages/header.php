@@ -136,13 +136,13 @@
                     </a>
                 </li>
                 <li>
-                    <a href="<?= DOMAIN?>index.php?url=hocky/index">
-                        <i class="fa fa-calendar-minus-o"></i> <span>QL học kì</span>
+                    <a href="<?= DOMAIN?>index.php?url=sinhvien/index">
+                        <i class="fa fa-user-md"></i> <span>QL sinh viên</span>
                     </a>
                 </li>
                 <li>
-                    <a href="#">
-                        <i class="fa fa-table"></i> <span>QL điểm</span>
+                    <a href="<?= DOMAIN?>index.php?url=diem/index">
+                        <i class="fa fa-book"></i> <span>QL điểm</span>
                     </a>
                 </li>
                 <li class="treeview">

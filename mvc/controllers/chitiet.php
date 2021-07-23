@@ -17,9 +17,6 @@ class chitiet extends Controller
         $this->model("chiTietModel")->them();
     }
 
-    public function sua() {
-        $this->model("chiTietModel")->sua();
-    }
     public function xoa() {
         $this->model("chiTietModel")->xoa();
     }
