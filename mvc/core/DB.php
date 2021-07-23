@@ -18,7 +18,7 @@ class DB
     }
     public function query($query)
     {
-//        echo $query;
+        error_log($query);
         return $this->con->query($query);
     }
 }

@@ -123,43 +123,22 @@
                         <i class="fa fa-home"></i> <span>Trang chủ</span>
                     </a>
                 </li>
-                <li class="treeview">
-                    <a href="#">
+                <li>
+                    <a href="<?= DOMAIN?>index.php?url=hocphan/index">
                         <i class="glyphicon glyphicon-list-alt"></i>
                         <span>QL học phần</span>
-                        <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
                     </a>
-                    <ul class="treeview-menu">
-                        <li><a href="<?= DOMAIN?>index.php?url=hocphan/index"><i class="fa fa-circle-o"></i> Danh sách học phần</a></li>
-                        <li><a href="<?= DOMAIN?>index.php?url=hocphan/index"><i class="fa fa-circle-o"></i> Thêm học phần</a></li>
-                    </ul>
                 </li>
-                <li class="treeview">
-                    <a href="#">
+                <li>
+                    <a href="<?= DOMAIN?>index.php?url=caytientrinh/index">
                         <i class="fa fa-code-fork"></i>
                         <span>QL cây tiến trình</span>
-                        <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
                     </a>
-                    <ul class="treeview-menu">
-                        <li><a href="<?= DOMAIN?>index.php?url=hocphan/index"><i class="fa fa-circle-o"></i> Danh sách cây tiến trình</a></li>
-                        <li><a href="<?= DOMAIN?>index.php?url=hocphan/index"><i class="fa fa-circle-o"></i> Thêm cây tiến trình</a></li>
-                    </ul>
                 </li>
-                <li class="treeview">
-                    <a href="#">
+                <li>
+                    <a href="<?= DOMAIN?>index.php?url=hocky/index">
                         <i class="fa fa-calendar-minus-o"></i> <span>QL học kì</span>
-                        <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
                     </a>
-                    <ul class="treeview-menu">
-                        <li><a href="<?= DOMAIN?>index.php?url=hocphan/index"><i class="fa fa-circle-o"></i> Danh sách học kỳ</a></li>
-                        <li><a href="<?= DOMAIN?>index.php?url=hocphan/index"><i class="fa fa-circle-o"></i> Thêm học kỳ</a></li>
-                    </ul>
                 </li>
                 <li>
                     <a href="#">

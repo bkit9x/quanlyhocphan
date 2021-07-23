@@ -20,6 +20,12 @@ class Controller
         require_once "./mvc/views/".$view.".php";
         require_once "./mvc/views/pages/footer2.php";
     }
+
+    public function view3($view, $data=[])
+    {
+        require_once "./mvc/views/".$view.".php";
+    }
+
     public function kiemTraDangNhap(){
         if (!isset($_SESSION['taikhoan'])){
             header("Location: ". DOMAIN."index.php?url=taikhoan/dangnhap");

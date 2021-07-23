@@ -1,5 +1,5 @@
 .add-btn{
     margin-bottom: 100%;
-    position: fixed;
+    position: absolute;
     display: inline-block;
 }

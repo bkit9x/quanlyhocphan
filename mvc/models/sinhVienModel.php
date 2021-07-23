@@ -1,5 +1,5 @@
 <?php
-class hocPhanModel extends DB
+class sinhVienModel extends DB
 {
     public function index() {
         $arr = array();

@@ -11,19 +11,16 @@ class hocphan extends Controller
         $model = $this->model("hocPhanModel")->index();
         $this->view("hocphan/index", ["list"=>$model], ["title" => "Quản lý học phần", ["link"=>"index.php?url=hocphan/index", "title"=>"Học phần"]]);
     }
-    public function them() {
-        $model = $this->model("hocPhanModel")->them();
-        $this->view("hocphan/them", $model);
-    }
-    public function sua() {
 
-        $model = $this->model("hocPhanModel")->index();
-        $this->view("hocphan/index", $model);
+    public function them() {
+        $this->model("hocPhanModel")->them();
+    }
+
+    public function sua() {
+        $this->model("hocPhanModel")->sua();
     }
     public function xoa() {
-
-        $model = $this->model("hocPhanModel")->index();
-        $this->view("hocphan/index", $model);
+        $this->model("hocPhanModel")->xoa();
     }
 
 }
