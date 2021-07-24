@@ -2,59 +2,38 @@
 class diemModel extends DB
 {
     public function index() {
+        $taikhoangv = $_SESSION['taikhoan'];
+        $taikhoangv = 'hieunv';
+        $sinhvien = addslashes($_GET['sv']);
         $arr = array();
-        $result = $this->query("SELECT `sv`.`hoten` as `diem`, `sv`.`taikhoan` as `iddiem`, `gv`.`hoten` as `giaovien`, `gv`.`taikhoan` as `idgiaovien` FROM `chunhiem`, `taikhoan` as `sv`, `taikhoan` as `gv` WHERE `chunhiem`.`iddiem` = `sv`.`taikhoan` AND `chunhiem`.`idgiaovien` = `gv`.`taikhoan`;");
+        $result = $this->query("SELECT `hocphan`.`mahocphan`, `hocphan`.`tenhocphan`, `hocphan`.`sotinchi` FROM `hocphan`, `chunhiem`, `caytientrinh_hocphan`, `caytientrinh_sinhvien` WHERE `caytientrinh_sinhvien`.`idsinhvien` = `chunhiem`.`idsinhvien` AND `caytientrinh_hocphan`.`mahocphan` = `hocphan`.`mahocphan` AND `caytientrinh_hocphan`.`idcaytientrinh` = `caytientrinh_sinhvien`.`idcaytientrinh` AND `caytientrinh_sinhvien`.`idsinhvien`='$sinhvien' AND `chunhiem`.`idgiaovien`='$taikhoangv';");
         if ($result && $result->num_rows > 0)
-            while ($row = $result->fetch_assoc())
+            while ($row = $result->fetch_assoc()){
+                $diem = $this->query("SELECT `diem` FROM `diem` WHERE `idhocphan`='".$row['mahocphan']."' AND `idsinhvien`='$sinhvien'");
+                $row['diem'] = NULL;
+                if ($diem && $diem->num_rows > 0) 
+                    $row['diem'] = $diem->fetch_assoc()['diem'];
                 $arr[] = $row;
-        return $arr;
-    }
-
-    public function them(){
-        if (isset($_POST['giaovien']) && isset($_POST['diem']))
-        {
-            $giaovien = addslashes($_POST['giaovien']);
-            $sql = "INSERT INTO `chunhiem` (`idgiaovien`, `iddiem`) VALUES ";
-            foreach($_POST['diem'] as $sv){
-                $diem = addslashes($sv);
-                $sql .= "('$giaovien', '$diem'),";
             }
-            $result = $this->query(rtrim($sql, ","));
-            if ($result)
-                header("Location: /index.php?url=diem/index&msg=themthanhcong&id=".$idcaytientrinh);
-            else
-                header("Location: /index.php?url=diem/index&msg=themloi&id=".$idcaytientrinh);
-        }
+        return $arr;
     }
-    public function xoa(){
-        if (isset($_POST['xoa_idgiaovien']) && isset($_POST['xoa_iddiem']))
+
+    public function sua(){
+        if (isset($_POST['sua_mahocphan']) && isset($_POST['sua_diem']))
         {
-            $giaovien = addslashes($_POST['xoa_idgiaovien']);
-            $diem = addslashes($_POST['xoa_iddiem']);
-            $result = $this->query("DELETE FROM `chunhiem` WHERE `chunhiem`.`iddiem` = '$diem' AND `chunhiem`.`idgiaovien` = '$giaovien'");
-            if ($result)
-                header("Location: /index.php?url=diem/index&msg=xoathanhcong");
+            $sinhvien = addslashes($_GET['sv']);
+            $diem = (float) $_POST['sua_diem'];
+            $mahocphan = $_POST['sua_mahocphan'];
+            $select = $this->query("SELECT `diem` FROM `diem` WHERE `idhocphan`='$mahocphan' AND `idsinhvien`='$sinhvien'");
+            if($select && $select->num_rows > 0)
+                $result = $this->query("UPDATE `diem` SET `diem` = '$diem' WHERE `diem`.`idhocphan` = '$mahocphan' AND `diem`.`idsinhvien` = '$sinhvien'");
             else
-                header("Location: /index.php?url=diem/index&msg=xoaloi");
+                $result = $this->query("INSERT INTO `diem` (`idhocphan`, `idsinhvien`, `diem`) VALUES ('$mahocphan', '$sinhvien', '$diem');");
+            if ($result)
+                header("Location: /index.php?url=diem/index&msg=suathanhcong&sv=".$sinhvien);
+            else
+                header("Location: /index.php?url=diem/index&msg=sualoi&sv=".$sinhvien);
         }
-    }
-
-    public function danhsachdiem() {
-        $arr = array();
-        $result = $this->query("SELECT `taikhoan`, `hoten` FROM `taikhoan` WHERE `loaitaikhoan` = '3'");
-        if ($result && $result->num_rows > 0)
-            while ($row = $result->fetch_assoc())
-                $arr[] = $row;
-        return $arr;
-    }
-
-    public function danhsachgiaovien() {
-        $arr = array();
-        $result = $this->query("SELECT `taikhoan`, `hoten` FROM `taikhoan` WHERE `loaitaikhoan` = '2'");
-        if ($result && $result->num_rows > 0)
-            while ($row = $result->fetch_assoc())
-                $arr[] = $row;
-        return $arr;
     }
 
 }

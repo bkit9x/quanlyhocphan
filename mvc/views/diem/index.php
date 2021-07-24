@@ -4,28 +4,33 @@
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-                <button type="button" class="btn btn-success add-btn" id="add-btn" data-toggle="modal" data-target="#modal-them"> <i class="fa fa-plus"></i> Thêm chủ nhiệm</button>
                 <table id="table" class="table table-bordered table-hover">
                     <thead>
                     <tr>
-                        <th>Tên sinh viên</th>
-                        <th>Tên giáo viên</th>
+                        <th>Mã học phần</th>
+                        <th>Tên học phần</th>
+                        <th>Số tín chỉ</th>
+                        <th>Điểm</th>
                         <th>Thao tác</th>
                     </tr>
                     </thead>
                     <tbody>
-                        <?php foreach ($data['list'] as $chunhiem): ?>
+                        <?php foreach ($data['list'] as $hocphan): ?>
                             <tr>
-                                <td><?= $chunhiem['sinhvien'];?></td>
-                                <td><?= $chunhiem['giaovien'];?></td>
-                                <td><button type="button" class="btn btn-danger btn-sm" data-toggle="modal" id="btn-modal-xoa" data-sinhvien="<?= $chunhiem['sinhvien'];?>" data-giaovien="<?= $chunhiem['giaovien'];?>" data-idsinhvien="<?= $chunhiem['idsinhvien'];?>" data-idgiaovien="<?= $chunhiem['idgiaovien'];?>" data-target="#modal-xoa"> <i class="fa fa-trash-o"></i> Xóa</button></td>
+                                <td><?= $hocphan['mahocphan'];?></td>
+                                <td><?= $hocphan['tenhocphan'];?></td>
+                                <td><?= $hocphan['sotinchi'];?></td>
+                                <td><?= $hocphan['diem'];?></td>
+                                <td><button type="button" class="btn btn-success btn-sm" data-toggle="modal" id="btn-modal-sua" data-mahocphan="<?= $hocphan['mahocphan'];?>" data-tenhocphan="<?= $hocphan['tenhocphan'];?>" data-diem="<?= $hocphan['diem'];?>"  data-target="#modal-sua"> <i class="fa fa-pencil-square-o"></i> Sửa điểm</button></td>
                             </tr>
                         <?php endforeach; ?>
                     </tbody>
                     <tfoot>
                     <tr>
-                        <th>Tên sinh viên</th>
-                        <th>Tên giáo viên</th>
+                        <th>Mã học phần</th>
+                        <th>Tên học phần</th>
+                        <th>Số tín chỉ</th>
+                        <th>Điểm</th>
                         <th>Thao tác</th>
                     </tr>
                     </tfoot>
@@ -35,35 +40,33 @@
         </div>
         <!-- /.box -->
 
-        <!-- .modal them -->
-        <div class="modal fade" id="modal-them">
+        <!-- .modal sua -->
+        <div class="modal fade" id="modal-sua">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title">Thêm chủ nhiệm</h4>
+                        <h4 class="modal-title">Chỉnh sửa điểm</h4>
                     </div>
                     <div class="modal-body">
-                        <form id="frm_them" role="form" method="post" action="./index.php?url=sinhvien/them">
+                        <form id="frm_sua" role="form" method="post" action="./index.php?url=diem/sua&sv=<?= $_GET['sv']; ?>">
                             <div class="form-group">
-                                <label>Chọn giáo viên</label>
-                                <select name="giaovien" class="form-control"><?php foreach ($data['giaovien'] as $giaovien): ?>
-                                        <option value="<?= $giaovien['taikhoan'];?>"><?= $giaovien['hoten'];?></option>
-                                    <?php endforeach; ?></select>
+                                <label>Tên học phần</label>
+                                <input type="hidden" name="sua_mahocphan" id="sua_mahocphan">
+                                <input type="text" name="sua_tenhocphan" id="sua_tenhocphan"  class="form-control" readonly>
                             </div>
 
                             <div class="form-group">
-                                <label>Chọn sinh viên</label>
-                                <select name="sinhvien[]" class="form-control" multiple size="10"><?php foreach ($data['sinhvien'] as $sinhvien): ?>
-                                        <option value="<?= $sinhvien['taikhoan'];?>"><?= $sinhvien['hoten'];?></option>
-                                    <?php endforeach; ?></select>
+                                <label>Số điểm</label>
+                                <input type="number" name="sua_diem" id="sua_diem"  class="form-control" placeholder="Nhập số điểm..." min="0" max="10" step="0.01" required>
                             </div>
+
                         </form>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default pull-left" data-dismiss="modal"><i class="fa fa-close"></i> Hủy</button>
-                        <button type="submit" class="btn btn-primary" form="frm_them"><i class="fa fa-save"></i> Lưu chủ nhiệm</button>
+                        <button type="submit" class="btn btn-primary" form="frm_sua"><i class="fa fa-save"></i> Lưu thay đổi</button>
                     </div>
                 </div>
                 <!-- /.modal-content -->
@@ -71,56 +74,23 @@
             <!-- /.modal-dialog -->
         </div>
         <!-- /.modal -->
-
-        <!-- .modal xoa -->
-        <div class="modal fade" id="modal-xoa">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title">Xóa chủ nhiệm</h4>
-                    </div>
-                    <div class="modal-body">
-                        <form id="frm_xoa" role="form" method="post" action="./index.php?url=sinhvien/xoa">
-                            <div class="form-group">
-                                <label>Tên giáo viên</label>
-                                <input type="hidden" name="xoa_idgiaovien" id="xoa_idgiaovien">
-                                <input type="text" readonly name="xoa_giaovien" id="xoa_giaovien" class="form-control">
-                            </div>
-
-                            <div class="form-group">
-                                <label>Tên sinh viên</label>
-                                <input type="hidden" name="xoa_idsinhvien" id="xoa_idsinhvien">
-                                <input type="text" readonly name="xoa_sinhvien" id="xoa_sinhvien"  class="form-control">
-                            </div>
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default pull-left" data-dismiss="modal"><i class="fa fa-close"></i> Hủy</button>
-                        <button type="submit" class="btn btn-danger" form="frm_xoa"><i class="fa fa-trash"></i> Xóa chủ nhiệm</button>
-                    </div>
-                </div>
-                <!-- /.modal-content -->
-            </div>
-            <!-- /.modal-dialog -->
-        </div>
-        <!-- /.modal -->
-
 
         <script>
-            $('#modal-xoa').on('show.bs.modal', function(e) {
-                var xoa_giaovien = $(e.relatedTarget).data('giaovien');
-                var xoa_sinhvien = $(e.relatedTarget).data('sinhvien');
-                var xoa_idgiaovien = $(e.relatedTarget).data('idgiaovien');
-                var xoa_idsinhvien = $(e.relatedTarget).data('idsinhvien');
-                $(e.currentTarget).find('#xoa_giaovien').val(xoa_giaovien);
-                $(e.currentTarget).find('#xoa_sinhvien').val(xoa_sinhvien);
-                $(e.currentTarget).find('#xoa_idgiaovien').val(xoa_idgiaovien);
-                $(e.currentTarget).find('#xoa_idsinhvien').val(xoa_idsinhvien);
-            });
-
             $(function () {
+                $('#modal-sua').on('show.bs.modal', function(e) {
+                    var sua_mahocphan = $(e.relatedTarget).data('mahocphan');
+                    var sua_tenhocphan = $(e.relatedTarget).data('tenhocphan');
+                    var sua_tensinhvien = $(e.relatedTarget).data('tensinhvien');
+                    var sua_idsinhvien = $(e.relatedTarget).data('idsinhvien');
+                    var sua_diem = $(e.relatedTarget).data('diem');
+
+                    //populate the textbox
+                    $(e.currentTarget).find('#sua_mahocphan').val(sua_mahocphan);
+                    $(e.currentTarget).find('#sua_tenhocphan').val(sua_tenhocphan);
+                    $(e.currentTarget).find('#sua_tensinhvien').val(sua_tensinhvien);
+                    $(e.currentTarget).find('#sua_idsinhvien').val(sua_idsinhvien);
+                    $(e.currentTarget).find('#sua_diem').val(sua_diem);
+                });
 
                 $('#table').DataTable({
                     dom: 'Bfrtip',

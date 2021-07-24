@@ -2,55 +2,33 @@
 class sinhVienModel extends DB
 {
     public function index() {
+        $taikhoangv = $_SESSION['taikhoan'];
+        $taikhoangv = 'hieunv';
         $arr = array();
-        $result = $this->query("SELECT `sv`.`hoten` as `sinhvien`, `sv`.`taikhoan` as `idsinhvien`, `gv`.`hoten` as `giaovien`, `gv`.`taikhoan` as `idgiaovien` FROM `chunhiem`, `taikhoan` as `sv`, `taikhoan` as `gv` WHERE `chunhiem`.`idsinhvien` = `sv`.`taikhoan` AND `chunhiem`.`idgiaovien` = `gv`.`taikhoan`;");
+        $result = $this->query("SELECT `sv`.`hoten` as `sinhvien`, `sv`.`taikhoan` as `idsinhvien`, `ctt`.`idcaytientrinh`, `ctt`.`tencaytientrinh`, `ctt`.`tenkhoa` FROM `chunhiem`, `taikhoan` as `sv`, `taikhoan` as `gv`, `caytientrinh` as `ctt`, `caytientrinh_sinhvien` as `cttsv` WHERE `chunhiem`.`idsinhvien` = `sv`.`taikhoan` AND `chunhiem`.`idgiaovien` = `gv`.`taikhoan` AND `cttsv`.`idcaytientrinh` = `ctt`.`idcaytientrinh` AND `cttsv`.`idsinhvien` = `sv`.`taikhoan` AND `gv`.`taikhoan`='$taikhoangv'");
         if ($result && $result->num_rows > 0)
             while ($row = $result->fetch_assoc())
                 $arr[] = $row;
         return $arr;
     }
 
-    public function them(){
-        if (isset($_POST['giaovien']) && isset($_POST['sinhvien']))
+    public function sua(){
+        if (isset($_POST['sua_idsinhvien']) && isset($_POST['sua_idcaytientrinh']) && isset($_POST['sua_idcaytientrinh_old']))
         {
-            $giaovien = addslashes($_POST['giaovien']);
-            $sql = "INSERT INTO `chunhiem` (`idgiaovien`, `idsinhvien`) VALUES ";
-            foreach($_POST['sinhvien'] as $sv){
-                $sinhvien = addslashes($sv);
-                $sql .= "('$giaovien', '$sinhvien'),";
-            }
-            $result = $this->query(rtrim($sql, ","));
+            $idcaytientrinh = addslashes($_POST['sua_idcaytientrinh']);
+            $idcaytientrinh_old = addslashes($_POST['sua_idcaytientrinh_old']);
+            $idsinhvien = addslashes($_POST['sua_idsinhvien']);
+            $result = $this->query("UPDATE `caytientrinh_sinhvien` SET `idcaytientrinh` = '$idcaytientrinh' WHERE `idcaytientrinh` = '$idcaytientrinh_old' AND  `idsinhvien` = '$idsinhvien'");
             if ($result)
-                header("Location: /index.php?url=sinhvien/index&msg=themthanhcong&id=".$idcaytientrinh);
+                header("Location: /index.php?url=sinhvien/index&msg=suathanhcong");
             else
-                header("Location: /index.php?url=sinhvien/index&msg=themloi&id=".$idcaytientrinh);
-        }
-    }
-    public function xoa(){
-        if (isset($_POST['xoa_idgiaovien']) && isset($_POST['xoa_idsinhvien']))
-        {
-            $giaovien = addslashes($_POST['xoa_idgiaovien']);
-            $sinhvien = addslashes($_POST['xoa_idsinhvien']);
-            $result = $this->query("DELETE FROM `chunhiem` WHERE `chunhiem`.`idsinhvien` = '$sinhvien' AND `chunhiem`.`idgiaovien` = '$giaovien'");
-            if ($result)
-                header("Location: /index.php?url=sinhvien/index&msg=xoathanhcong");
-            else
-                header("Location: /index.php?url=sinhvien/index&msg=xoaloi");
+                header("Location: /index.php?url=sinhvien/index&msg=sualoi");
         }
     }
 
-    public function danhsachsinhvien() {
+    public function danhsachcaytientrinh() {
         $arr = array();
-        $result = $this->query("SELECT `taikhoan`, `hoten` FROM `taikhoan` WHERE `loaitaikhoan` = '3'");
-        if ($result && $result->num_rows > 0)
-            while ($row = $result->fetch_assoc())
-                $arr[] = $row;
-        return $arr;
-    }
-
-    public function danhsachgiaovien() {
-        $arr = array();
-        $result = $this->query("SELECT `taikhoan`, `hoten` FROM `taikhoan` WHERE `loaitaikhoan` = '2'");
+        $result = $this->query("SELECT `idcaytientrinh`, `tencaytientrinh`, `tenkhoa` FROM `caytientrinh` WHERE 1");
         if ($result && $result->num_rows > 0)
             while ($row = $result->fetch_assoc())
                 $arr[] = $row;

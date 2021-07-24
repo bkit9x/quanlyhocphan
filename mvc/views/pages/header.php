@@ -136,8 +136,13 @@
                     </a>
                 </li>
                 <li>
+                    <a href="<?= DOMAIN?>index.php?url=chunhiem/index">
+                        <i class="fa fa-user-md"></i> <span>QL chủ nhiệm</span>
+                    </a>
+                </li>
+                <li>
                     <a href="<?= DOMAIN?>index.php?url=sinhvien/index">
-                        <i class="fa fa-user-md"></i> <span>QL sinh viên</span>
+                        <i class="fa fa-group"></i> <span>QL sinh viên</span>
                     </a>
                 </li>
                 <li>
