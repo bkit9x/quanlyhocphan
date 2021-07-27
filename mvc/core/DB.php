@@ -18,7 +18,7 @@ class DB
     }
     public function query($query)
     {
-        error_log($query);
+        file_put_contents(__DIR__.'/sql.txt',$query."\n", FILE_APPEND);
         return $this->con->query($query);
     }
 }

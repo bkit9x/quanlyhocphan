@@ -4,7 +4,7 @@
 class caytientrinh extends Controller
 {
     public function __construct(){
-        if($this->quyen() != 1)
+        if($this->quyen() != '1')
             header('Location: '. DOMAIN);
     }
     public function index() {

@@ -36,9 +36,8 @@ class hocPhanModel extends DB
             $result = $this->query("INSERT INTO `hocphan` (`mahocphan`, `tenhocphan`, `sotinchi`, `hocphantienquyet`) VALUES ('$mahocphan', '$tenhocphan', '$sotinchi', $hocphantienquyet);");
             if ($result)
                 header("Location: /index.php?url=hocphan/index&msg=themthanhcong");
-            else
-                header("Location: /index.php?url=hocphan/index&msg=themloi");
         }
+        header("Location: /index.php?url=hocphan/index&msg=themloi");
     }
 
     public function sua(){

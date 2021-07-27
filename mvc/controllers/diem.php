@@ -4,7 +4,7 @@
 class diem extends Controller
 {
     public function __construct(){
-        if($this->quyen() != 1)
+        if($this->quyen() != '2' || !isset($_GET['sv']) )
             header('Location: '. DOMAIN);
     }
     public function index() {

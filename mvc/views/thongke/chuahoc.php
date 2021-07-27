@@ -1,38 +1,37 @@
-<div class="box box-default">
+        <div class="box box-default">
             <div class="box-header">
-                <h3 class="box-title">Danh sách tài khoản</h3>
+                <h3 class="box-title">Danh sách học phần chưa học</h3>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
                 <table id="table" class="table table-bordered table-hover">
                     <thead>
                     <tr>
-                        <th>Tài khoản</th>
-                        <th>Họ và tên</th>
-                        <th>Loại tài khoản</th>
-                        <th>Thao tác</th>
+                        <th>Mã học phần</th>
+                        <th>Tên học phần</th>
+                        <th>Số tín chỉ</th>
+                        <th>Mã môn tiên quyết</th>
+                        <th>Tên môn tiên quyết</th>
                     </tr>
                     </thead>
                     <tbody>
-                        <?php foreach ($data['list'] as $taikhoan): ?>
+                        <?php foreach ($data['list'] as $hocphan): ?>
                             <tr>
-                                <td><?= $taikhoan['taikhoan'];?></td>
-                                <td><?= $taikhoan['hoten'];?></td>
-                                <td><?= $taikhoan['tenloaitaikhoan'];?></td>
-                                <td>
-                                  <a href="./index.php?url=taikhoan/capnhat&u=<?= $taikhoan['taikhoan'];?>" class="btn btn-success btn-sm">
-                                    <i class="fa fa-pencil"></i> Cập nhật
-                                </a>
-                                </td>
+                                <td><?= $hocphan['mahocphan'];?></td>
+                                <td><?= $hocphan['tenhocphan'];?></td>
+                                <td><?= $hocphan['sotinchi'];?></td>
+                                <td><?= $hocphan['mahocphantienquyet'];?></td>
+                                <td><?= $hocphan['tenhocphantienquyet'];?></td>
                             </tr>
                         <?php endforeach; ?>
                     </tbody>
                     <tfoot>
                     <tr>
-                    <th>Tài khoản</th>
-                        <th>Họ và tên</th>
-                        <th>Loại tài khoản</th>
-                        <th>Thao tác</th>
+                        <th>Mã học phần</th>
+                        <th>Tên học phần</th>
+                        <th>Số tín chỉ</th>
+                        <th>Mã môn tiên quyết</th>
+                        <th>Tên môn tiên quyết</th>
                     </tr>
                     </tfoot>
                 </table>
@@ -42,10 +41,10 @@
         <!-- /.box -->
 
         <script>
+            
             $(function () {
 
                 $('#table').DataTable({
-                    dom: 'Bfrtip',
                     "pageLength": 10,
                     "language": {
                         "search":"Tìm kiếm",

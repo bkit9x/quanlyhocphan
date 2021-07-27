@@ -45,6 +45,8 @@
     <!-- DataTables -->
     <script src="<?php echo DOMAIN;?>public/datatables.net/js/jquery.dataTables.min.js"></script>
     <script src="<?php echo DOMAIN;?>public/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+    <!-- ChartJS -->
+    <script src="<?php echo DOMAIN;?>public/chart.js/Chart.js"></script>
 </head>
 <body class="hold-transition skin-green-light sidebar-mini">
 <div class="wrapper">
@@ -85,7 +87,7 @@
                             <!-- Menu Footer-->
                             <li class="user-footer">
                                 <div class="pull-left">
-                                    <a href="#" class="btn btn-default btn-flat">Đổi mật khẩu</a>
+                                    <a href="<?=DOMAIN;?>index.php?url=taikhoan/capnhat" class="btn btn-default btn-flat">Đổi mật khẩu</a>
                                 </div>
                                 <div class="pull-right">
                                     <a href="<?=DOMAIN;?>index.php?url=taikhoan/dangxuat" class="btn btn-default btn-flat">Đăng xuất</a>
@@ -123,60 +125,89 @@
                         <i class="fa fa-home"></i> <span>Trang chủ</span>
                     </a>
                 </li>
+                <?php #Quản trị viên# ?>
+                <?php if ($_SESSION['idloaitaikhoan'] == '1'): ?>
                 <li>
                     <a href="<?= DOMAIN?>index.php?url=hocphan/index">
-                        <i class="glyphicon glyphicon-list-alt"></i>
-                        <span>QL học phần</span>
+                        <i class="glyphicon glyphicon-list-alt"></i><span>QL học phần</span>
                     </a>
                 </li>
                 <li>
                     <a href="<?= DOMAIN?>index.php?url=caytientrinh/index">
-                        <i class="fa fa-code-fork"></i>
-                        <span>QL cây tiến trình</span>
+                        <i class="fa fa-code-fork"></i><span>QL cây tiến trình</span>
                     </a>
                 </li>
                 <li>
                     <a href="<?= DOMAIN?>index.php?url=chunhiem/index">
-                        <i class="fa fa-user-md"></i> <span>QL chủ nhiệm</span>
+                        <i class="fa fa-user-md"></i><span>QL chủ nhiệm</span>
                     </a>
                 </li>
-                <li>
-                    <a href="<?= DOMAIN?>index.php?url=sinhvien/index">
-                        <i class="fa fa-group"></i> <span>QL sinh viên</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="<?= DOMAIN?>index.php?url=diem/index">
-                        <i class="fa fa-book"></i> <span>QL điểm</span>
-                    </a>
-                </li>
-                <li class="treeview">
-                    <a href="<?= DOMAIN?>index.php?url=hocphan/index">
-                        <i class="fa fa-pie-chart"></i> <span>Thống kê</span>
+                <li class="treeview active">
+                    <a href="#">
+                        <i class="fa fa-folder"></i><span>QL tài khoản</span>
                         <span class="pull-right-container">
-                             <i class="fa fa-angle-left pull-right"></i>
+                            <i class="fa fa-angle-left pull-right"></i>
                         </span>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="<?= DOMAIN?>index.php?url=hocphan/index"><i class="fa fa-circle-o"></i> Tổng quát</a></li>
-                        <li><a href="<?= DOMAIN?>index.php?url=hocphan/index"><i class="fa fa-circle-o"></i> Học phần chưa học</a></li>
-                        <li><a href="<?= DOMAIN?>index.php?url=hocphan/index"><i class="fa fa-circle-o"></i> Học phần đã học</a></li>
-                        <li><a href="<?= DOMAIN?>index.php?url=hocphan/index"><i class="fa fa-circle-o"></i> Học phần cần học lại</a></li>
+                        <li><a href="<?= DOMAIN?>index.php?url=taikhoan/index"><i class="fa fa-list"></i> Danh sách tài khoản</a></li>
+                        <li><a href="<?= DOMAIN?>index.php?url=taikhoan/capnhat"><i class="fa fa-circle-o"></i> Chỉnh sửa thông tin</a></li>
+                        <li><a href="<?= DOMAIN?>index.php?url=taikhoan/dangxuat"><i class="fa fa-circle-o"></i> Đăng xuất</a></li>
                     </ul>
                 </li>
-                <li class="treeview">
+
+                <?php #Giáo viên# ?>
+                <?php elseif($_SESSION['idloaitaikhoan'] == '2'):?>
+                <li>
+                    <a href="<?= DOMAIN?>index.php?url=sinhvien/index">
+                        <i class="fa fa-group"></i><span>QL sinh viên</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="<?= DOMAIN?>index.php?url=thongke/index">
+                        <i class="fa fa-pie-chart"></i><span>Thống kê</span>
+                    </a>
+                </li>
+                <li class="treeview active">
                     <a href="#">
-                        <i class="fa fa-folder"></i> <span>QL tài khoản</span>
+                        <i class="fa fa-folder"></i><span>QL tài khoản</span>
                         <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </span>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="<?= DOMAIN?>index.php?url=hocphan/index"><i class="fa fa-circle-o"></i> Chỉnh sửa thông tin</a></li>
-                        <li><a href="<?= DOMAIN?>index.php?url=hocphan/index"><i class="fa fa-circle-o"></i> Đổi mật khẩu</a></li>
-                        <li><a href="<?= DOMAIN?>index.php?url=hocphan/index"><i class="fa fa-circle-o"></i> Đăng xuất</a></li>
+                        <li><a href="<?= DOMAIN?>index.php?url=taikhoan/capnhat"><i class="fa fa-circle-o"></i> Chỉnh sửa thông tin</a></li>
+                        <li><a href="<?= DOMAIN?>index.php?url=taikhoan/dangxuat"><i class="fa fa-circle-o"></i> Đăng xuất</a></li>
                     </ul>
                 </li>
+
+                <?php #Sinh viên# ?>
+                <?php else: ?>
+                <li class="treeview active">
+                    <a href="#">
+                        <i class="fa fa-pie-chart"></i><span>Thống kê</span>
+                        <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="<?= DOMAIN?>index.php?url=thongke/tongquat"><i class="fa fa-circle-o"></i> Tổng quát</a></li>
+                        <li><a href="<?= DOMAIN?>index.php?url=thongke/chuahoc"><i class="fa fa-circle-o"></i> Học phần chưa học</a></li>
+                        <li><a href="<?= DOMAIN?>index.php?url=thongke/dahoc"><i class="fa fa-circle-o"></i> Học phần đã học</a></li>
+                        <li><a href="<?= DOMAIN?>index.php?url=thongke/chuadat"><i class="fa fa-circle-o"></i> Học phần chưa đạt</a></li>
+                    </ul>
+                </li>
+                <li class="treeview active">
+                    <a href="#">
+                        <i class="fa fa-folder"></i><span>QL tài khoản</span>
+                        <span class="pull-right-container">
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </span>
+                    </a>
+                    <ul class="treeview-menu menu-open">
+                        <li><a href="<?= DOMAIN?>index.php?url=taikhoan/capnhat"><i class="fa fa-circle-o"></i> Chỉnh sửa thông tin</a></li>
+                        <li><a href="<?= DOMAIN?>index.php?url=taikhoan/dangxuat"><i class="fa fa-circle-o"></i> Đăng xuất</a></li>
+                    </ul>
+                </li>
+                <?php endif;?>
             </ul>
         </section>
         <!-- /.sidebar -->

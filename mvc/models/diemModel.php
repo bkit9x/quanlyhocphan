@@ -3,7 +3,6 @@ class diemModel extends DB
 {
     public function index() {
         $taikhoangv = $_SESSION['taikhoan'];
-        $taikhoangv = 'hieunv';
         $sinhvien = addslashes($_GET['sv']);
         $arr = array();
         $result = $this->query("SELECT `hocphan`.`mahocphan`, `hocphan`.`tenhocphan`, `hocphan`.`sotinchi` FROM `hocphan`, `chunhiem`, `caytientrinh_hocphan`, `caytientrinh_sinhvien` WHERE `caytientrinh_sinhvien`.`idsinhvien` = `chunhiem`.`idsinhvien` AND `caytientrinh_hocphan`.`mahocphan` = `hocphan`.`mahocphan` AND `caytientrinh_hocphan`.`idcaytientrinh` = `caytientrinh_sinhvien`.`idcaytientrinh` AND `caytientrinh_sinhvien`.`idsinhvien`='$sinhvien' AND `chunhiem`.`idgiaovien`='$taikhoangv';");

@@ -4,7 +4,7 @@
 class sinhvien extends Controller
 {
     public function __construct(){
-        if($this->quyen() != 1)
+        if($this->quyen() != '2')
             header('Location: '. DOMAIN);
     }
     public function index() {
