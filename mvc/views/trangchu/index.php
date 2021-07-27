@@ -1,6 +1,6 @@
 <div class="row">
 <?php foreach ($data['list'] as $menu): ?>
-    <div class="col-lg-6 col-xs-12">
+    <div class="col-lg-6 col-md-6 col-xs-6">
         <!-- small box -->
         <div class="small-box <?= $menu['bg'];?>">
             <div class="inner">

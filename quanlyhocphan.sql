@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: mysql
--- Thời gian đã tạo: Th7 23, 2021 lúc 02:51 PM
+-- Thời gian đã tạo: Th7 27, 2021 lúc 12:48 PM
 -- Phiên bản máy phục vụ: 5.6.51
 -- Phiên bản PHP: 7.4.21
 
@@ -122,6 +122,26 @@ INSERT INTO `caytientrinh_hocphan` (`idcaytientrinh`, `mahocphan`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Cấu trúc bảng cho bảng `caytientrinh_sinhvien`
+--
+
+CREATE TABLE `caytientrinh_sinhvien` (
+  `idsinhvien` varchar(16) COLLATE utf8_unicode_ci NOT NULL,
+  `idcaytientrinh` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `caytientrinh_sinhvien`
+--
+
+INSERT INTO `caytientrinh_sinhvien` (`idsinhvien`, `idcaytientrinh`) VALUES
+('user1', 2),
+('taipt', 3),
+('user0', 3);
+
+-- --------------------------------------------------------
+
+--
 -- Cấu trúc bảng cho bảng `chunhiem`
 --
 
@@ -135,7 +155,36 @@ CREATE TABLE `chunhiem` (
 --
 
 INSERT INTO `chunhiem` (`idsinhvien`, `idgiaovien`) VALUES
-('taipt', 'hieunv');
+('user1', 'giaovien1'),
+('taipt', 'hieunv'),
+('user0', 'hieunv');
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `diem`
+--
+
+CREATE TABLE `diem` (
+  `idhocphan` varchar(16) COLLATE utf8_unicode_ci NOT NULL,
+  `idsinhvien` varchar(16) COLLATE utf8_unicode_ci NOT NULL,
+  `diem` float NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `diem`
+--
+
+INSERT INTO `diem` (`idhocphan`, `idsinhvien`, `diem`) VALUES
+('CB1106', 'taipt', 7.5),
+('CB1106', 'user0', 8.5),
+('CB1106', 'user1', 3),
+('CB1107', 'taipt', 0),
+('CB1107', 'user1', 9),
+('CB1110', 'taipt', 10),
+('TH1341', 'taipt', 3),
+('TH1602', 'taipt', 10),
+('TH1602', 'user0', 10);
 
 -- --------------------------------------------------------
 
@@ -231,7 +280,7 @@ CREATE TABLE `loaitaikhoan` (
 --
 
 INSERT INTO `loaitaikhoan` (`idloaitaikhoan`, `tenloaitaikhoan`) VALUES
-(1, 'Quản trị viên'),
+(1, 'Phòng đạo tạo'),
 (2, 'Giáo viên'),
 (3, 'Sinh viên');
 
@@ -253,9 +302,12 @@ CREATE TABLE `taikhoan` (
 --
 
 INSERT INTO `taikhoan` (`taikhoan`, `matkhau`, `hoten`, `loaitaikhoan`) VALUES
-('admin', 'e10adc3949ba59abbe56e057f20f883e', 'Phan Thành Tài', 1),
+('admin', 'e10adc3949ba59abbe56e057f20f883e', 'Trưởng phòng', 1),
+('giaovien1', 'e10adc3949ba59abbe56e057f20f883e', 'Giáo viên 1', 2),
 ('hieunv', 'e10adc3949ba59abbe56e057f20f883e', 'Nguyễn Văn Hiếu', 2),
-('taipt', 'e10adc3949ba59abbe56e057f20f883e', 'Phan Thành Tài', 3);
+('taipt', 'b59c67bf196a4758191e42f76670ceba', 'Phan Thành Tài', 3),
+('user0', 'e10adc3949ba59abbe56e057f20f883e', 'Sinh viên 0 NÈ', 3),
+('user1', 'e10adc3949ba59abbe56e057f20f883e', 'Sinh viên B', 3);
 
 --
 -- Chỉ mục cho các bảng đã đổ
@@ -275,11 +327,25 @@ ALTER TABLE `caytientrinh_hocphan`
   ADD KEY `fk_hocphan` (`mahocphan`);
 
 --
+-- Chỉ mục cho bảng `caytientrinh_sinhvien`
+--
+ALTER TABLE `caytientrinh_sinhvien`
+  ADD PRIMARY KEY (`idsinhvien`,`idcaytientrinh`),
+  ADD KEY `fk_caytientrinh_sinhvien` (`idcaytientrinh`);
+
+--
 -- Chỉ mục cho bảng `chunhiem`
 --
 ALTER TABLE `chunhiem`
   ADD PRIMARY KEY (`idsinhvien`,`idgiaovien`),
   ADD KEY `fk_chunhiem_giaovien` (`idgiaovien`);
+
+--
+-- Chỉ mục cho bảng `diem`
+--
+ALTER TABLE `diem`
+  ADD PRIMARY KEY (`idhocphan`,`idsinhvien`),
+  ADD KEY `fk_diem_sinhvien` (`idsinhvien`);
 
 --
 -- Chỉ mục cho bảng `hocphan`
@@ -329,11 +395,25 @@ ALTER TABLE `caytientrinh_hocphan`
   ADD CONSTRAINT `fk_hocphan` FOREIGN KEY (`mahocphan`) REFERENCES `hocphan` (`mahocphan`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
+-- Các ràng buộc cho bảng `caytientrinh_sinhvien`
+--
+ALTER TABLE `caytientrinh_sinhvien`
+  ADD CONSTRAINT `fk_caytientrinh_sinhvien` FOREIGN KEY (`idcaytientrinh`) REFERENCES `caytientrinh` (`idcaytientrinh`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_sinhvien` FOREIGN KEY (`idsinhvien`) REFERENCES `taikhoan` (`taikhoan`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
 -- Các ràng buộc cho bảng `chunhiem`
 --
 ALTER TABLE `chunhiem`
   ADD CONSTRAINT `fk_chunhiem_giaovien` FOREIGN KEY (`idgiaovien`) REFERENCES `taikhoan` (`taikhoan`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_chunhiem_sinhvien` FOREIGN KEY (`idsinhvien`) REFERENCES `taikhoan` (`taikhoan`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Các ràng buộc cho bảng `diem`
+--
+ALTER TABLE `diem`
+  ADD CONSTRAINT `fk_diem_hocphan` FOREIGN KEY (`idhocphan`) REFERENCES `hocphan` (`mahocphan`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_diem_sinhvien` FOREIGN KEY (`idsinhvien`) REFERENCES `taikhoan` (`taikhoan`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Các ràng buộc cho bảng `hocphan`

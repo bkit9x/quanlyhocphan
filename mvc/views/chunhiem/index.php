@@ -1,4 +1,4 @@
-        <div class="box box-default">
+        <div class="box box-primary">
             <div class="box-header">
                 <h3 class="box-title">Danh sách chủ nhiệm</h3>
             </div>
@@ -109,18 +109,18 @@
 
 
         <script>
-            $('#modal-xoa').on('show.bs.modal', function(e) {
-                var xoa_giaovien = $(e.relatedTarget).data('giaovien');
-                var xoa_sinhvien = $(e.relatedTarget).data('sinhvien');
-                var xoa_idgiaovien = $(e.relatedTarget).data('idgiaovien');
-                var xoa_idsinhvien = $(e.relatedTarget).data('idsinhvien');
-                $(e.currentTarget).find('#xoa_giaovien').val(xoa_giaovien);
-                $(e.currentTarget).find('#xoa_sinhvien').val(xoa_sinhvien);
-                $(e.currentTarget).find('#xoa_idgiaovien').val(xoa_idgiaovien);
-                $(e.currentTarget).find('#xoa_idsinhvien').val(xoa_idsinhvien);
-            });
-
             $(function () {
+                $('#modal-xoa').on('show.bs.modal', function(e) {
+                    var xoa_giaovien = $(e.relatedTarget).data('giaovien');
+                    var xoa_sinhvien = $(e.relatedTarget).data('sinhvien');
+                    var xoa_idgiaovien = $(e.relatedTarget).data('idgiaovien');
+                    var xoa_idsinhvien = $(e.relatedTarget).data('idsinhvien');
+                    $(e.currentTarget).find('#xoa_giaovien').val(xoa_giaovien);
+                    $(e.currentTarget).find('#xoa_sinhvien').val(xoa_sinhvien);
+                    $(e.currentTarget).find('#xoa_idgiaovien').val(xoa_idgiaovien);
+                    $(e.currentTarget).find('#xoa_idsinhvien').val(xoa_idsinhvien);
+                });
+
 
                 $('#table').DataTable({
                     dom: 'Bfrtip',

@@ -27,6 +27,6 @@
             <!-- /.col -->
         </div>
     </form>
-    <a href="login.html" class="text-center">Tôi đã có tài khoản</a>
+    <a href="./index.php?url=taikhoan/dangnhap" class="text-center">Tôi đã có tài khoản</a>
 </div>
 <!-- /.form-box -->

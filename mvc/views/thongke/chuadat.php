@@ -1,4 +1,4 @@
-<div class="box box-default">
+<div class="box box-primary">
             <div class="box-header">
                 <h3 class="box-title">Danh sách học phần chưa đạt</h3>
             </div>

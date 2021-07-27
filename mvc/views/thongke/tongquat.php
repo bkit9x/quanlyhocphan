@@ -170,7 +170,7 @@
         value    : <?= $data['list']['dahoc']['mon'];?>,
         color    : '#00a65a',
         highlight: '#00a65a',
-        label    : 'Môm đã học'
+        label    : 'Môn đã học'
       },
       {
         value    : <?= $data['list']['chuahoc']['mon'];?>,

@@ -48,7 +48,7 @@
     <!-- ChartJS -->
     <script src="<?php echo DOMAIN;?>public/chart.js/Chart.js"></script>
 </head>
-<body class="hold-transition skin-green-light sidebar-mini">
+<body class="hold-transition skin-green sidebar-mini">
 <div class="wrapper">
 
     <header class="main-header">
@@ -144,7 +144,7 @@
                 </li>
                 <li class="treeview active">
                     <a href="#">
-                        <i class="fa fa-folder"></i><span>QL tài khoản</span>
+                        <i class="fa fa-user"></i><span>QL tài khoản</span>
                         <span class="pull-right-container">
                             <i class="fa fa-angle-left pull-right"></i>
                         </span>
@@ -170,7 +170,7 @@
                 </li>
                 <li class="treeview active">
                     <a href="#">
-                        <i class="fa fa-folder"></i><span>QL tài khoản</span>
+                        <i class="fa fa-user"></i><span>QL tài khoản</span>
                         <span class="pull-right-container">
                             <i class="fa fa-angle-left pull-right"></i>
                         </span>
@@ -197,7 +197,7 @@
                 </li>
                 <li class="treeview active">
                     <a href="#">
-                        <i class="fa fa-folder"></i><span>QL tài khoản</span>
+                        <i class="fa fa-user"></i><span>QL tài khoản</span>
                         <span class="pull-right-container">
                             <i class="fa fa-angle-left pull-right"></i>
                         </span>
