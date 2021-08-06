@@ -38,10 +38,10 @@ class thongKeModel extends DB
         }
 
         $query_diem = $this->query("SELECT `diem`, `hocphan`.`tenhocphan`, `hocphan`.`sotinchi` FROM `diem`, `hocphan` WHERE `diem`.`idhocphan` = `hocphan`.`mahocphan` AND `diem`.`idsinhvien` = '$sinhvien';");
-        $arr['diem']=[];
+        $arr['diem'] = [];
         if ($query_diem && $query_diem->num_rows > 0)
             while ($row = $query_diem->fetch_assoc())
-                $arr['diem'][]=['hocphan'=>$row['tenhocphan'],'diem'=>$row['diem'],'tinchi'=>$row['sotinchi']];
+                $arr['diem'][] = ['hocphan' => $row['tenhocphan'], 'diem' => $row['diem'], 'tinchi' => $row['sotinchi']];
 
         return $arr;
     }

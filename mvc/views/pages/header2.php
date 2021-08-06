@@ -1,22 +1,19 @@
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>AdminLTE 2 | Log in</title>
+    <title>Quản lý học phần</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.7 -->
-    <link rel="stylesheet" href="<?php echo DOMAIN;?>public/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="<?= DOMAIN ?>public/bootstrap/dist/css/bootstrap.min.css">
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="<?php echo DOMAIN;?>public/font-awesome/css/font-awesome.min.css">
-    <!-- Ionicons -->
-    <link rel="stylesheet" href="<?php echo DOMAIN;?>public/Ionicons/css/ionicons.min.css">
+    <link rel="stylesheet" href="<?= DOMAIN ?>public/font-awesome/css/font-awesome.min.css">
     <!-- Theme style -->
-    <link rel="stylesheet" href="<?php echo DOMAIN;?>public/dist/css/AdminLTE.min.css">
-    <!-- AdminLTE Skins. Choose a skin from the css/skins
-    <!-- iCheck -->
-    <link rel="stylesheet" href="<?php echo DOMAIN;?>public/plugins/iCheck/square/blue.css">
+    <link rel="stylesheet" href="<?= DOMAIN ?>public/dist/css/AdminLTE.min.css">
+    <!-- AdminLTE Skins. Choose a skin from the css/skins -->
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -28,18 +25,22 @@
     <!-- Google Font -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
     <style>
-        .login-page, .register-page{
-            background-image: url('<?php echo DOMAIN;?>/public/dist/img/bg.jpeg');
+        .login-page,
+        .register-page {
+            background-image: url('<?= DOMAIN ?>/public/dist/img/bg.jpeg');
             background-size: cover;
         }
-        .login-box, .register-box{
+
+        .login-box,
+        .register-box {
             opacity: 0.9;
         }
     </style>
 </head>
+
 <body class="hold-transition login-page">
-<div class="login-box">
-    <div class="login-logo">
-        <a href="<?php echo DOMAIN;?>"><b>QUẢN LÝ</b> HỌC PHẦN</a>
-    </div>
-    <!-- /.login-logo -->
+    <div class="login-box">
+        <div class="login-logo">
+            <a href="<?= DOMAIN ?>"><b>QUẢN LÝ</b> HỌC PHẦN</a>
+        </div>
+        <!-- /.login-logo -->

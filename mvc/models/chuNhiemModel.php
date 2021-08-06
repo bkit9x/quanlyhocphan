@@ -1,7 +1,8 @@
 <?php
 class chuNhiemModel extends DB
 {
-    public function index() {
+    public function index()
+    {
         $arr = array();
         $result = $this->query("SELECT `sv`.`hoten` as `sinhvien`, `sv`.`taikhoan` as `idsinhvien`, `gv`.`hoten` as `giaovien`, `gv`.`taikhoan` as `idgiaovien` FROM `chunhiem`, `taikhoan` as `sv`, `taikhoan` as `gv` WHERE `chunhiem`.`idsinhvien` = `sv`.`taikhoan` AND `chunhiem`.`idgiaovien` = `gv`.`taikhoan`;");
         if ($result && $result->num_rows > 0)
@@ -10,36 +11,37 @@ class chuNhiemModel extends DB
         return $arr;
     }
 
-    public function them(){
-        if (isset($_POST['giaovien']) && isset($_POST['sinhvien']))
-        {
+    public function them()
+    {
+        if (isset($_POST['giaovien']) && isset($_POST['sinhvien'])) {
             $giaovien = addslashes($_POST['giaovien']);
             $sql = "INSERT INTO `chunhiem` (`idgiaovien`, `idsinhvien`) VALUES ";
-            foreach($_POST['sinhvien'] as $sv){
+            foreach ($_POST['sinhvien'] as $sv) {
                 $sinhvien = addslashes($sv);
                 $sql .= "('$giaovien', '$sinhvien'),";
             }
             $result = $this->query(rtrim($sql, ","));
             if ($result)
-                header("Location: /index.php?url=chunhiem/index&msg=themthanhcong");
+                header("Location: " . DOMAIN . "chunhiem/index&msg=themthanhcong");
             else
-                header("Location: /index.php?url=chunhiem/index&msg=themloi");
+                header("Location: " . DOMAIN . "chunhiem/index&msg=themloi");
         }
     }
-    public function xoa(){
-        if (isset($_POST['xoa_idgiaovien']) && isset($_POST['xoa_idsinhvien']))
-        {
+    public function xoa()
+    {
+        if (isset($_POST['xoa_idgiaovien']) && isset($_POST['xoa_idsinhvien'])) {
             $giaovien = addslashes($_POST['xoa_idgiaovien']);
             $sinhvien = addslashes($_POST['xoa_idsinhvien']);
             $result = $this->query("DELETE FROM `chunhiem` WHERE `chunhiem`.`idsinhvien` = '$sinhvien' AND `chunhiem`.`idgiaovien` = '$giaovien'");
             if ($result)
-                header("Location: /index.php?url=chunhiem/index&msg=xoathanhcong");
+                header("Location: " . DOMAIN . "chunhiem/index&msg=xoathanhcong");
             else
-                header("Location: /index.php?url=chunhiem/index&msg=xoaloi");
+                header("Location: " . DOMAIN . "chunhiem/index&msg=xoaloi");
         }
     }
 
-    public function danhsachsinhvien() {
+    public function danhsachsinhvien()
+    {
         $arr = array();
         $result = $this->query("SELECT `taikhoan`, `hoten` FROM `taikhoan` WHERE `loaitaikhoan` = '3'");
         if ($result && $result->num_rows > 0)
@@ -48,7 +50,8 @@ class chuNhiemModel extends DB
         return $arr;
     }
 
-    public function danhsachgiaovien() {
+    public function danhsachgiaovien()
+    {
         $arr = array();
         $result = $this->query("SELECT `taikhoan`, `hoten` FROM `taikhoan` WHERE `loaitaikhoan` = '2'");
         if ($result && $result->num_rows > 0)
@@ -56,5 +59,4 @@ class chuNhiemModel extends DB
                 $arr[] = $row;
         return $arr;
     }
-
 }

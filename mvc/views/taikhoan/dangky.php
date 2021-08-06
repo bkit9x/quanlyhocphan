@@ -1,9 +1,9 @@
 <div class="register-box-body">
     <p class="login-box-msg">Đăng ký</p>
-    <?php if ($data): ?>
-        <p class="text-red"><?= $data;?></p>
+    <?php if ($data) : ?>
+        <p class="text-red"><?= $data; ?></p>
     <?php endif; ?>
-    <form action="<?= DOMAIN ?>index.php?url=taikhoan/dangky" method="post">
+    <form action="<?=DOMAIN?>taikhoan/dangky" method="post">
         <div class="form-group has-feedback">
             <input type="text" name="taikhoan" class="form-control" placeholder="Tài khoản">
             <span class="glyphicon glyphicon-user form-control-feedback"></span>
@@ -27,6 +27,6 @@
             <!-- /.col -->
         </div>
     </form>
-    <a href="./index.php?url=taikhoan/dangnhap" class="text-center">Tôi đã có tài khoản</a>
+    <a href="taikhoan/dangnhap" class="text-center">Tôi đã có tài khoản</a>
 </div>
 <!-- /.form-box -->

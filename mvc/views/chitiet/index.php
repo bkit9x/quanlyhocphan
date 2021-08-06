@@ -7,30 +7,30 @@
         <button type="button" class="btn btn-success add-btn" id="add-btn" data-toggle="modal" data-target="#modal-them"> <i class="fa fa-plus"></i> Thêm học phần mới</button>
         <table id="table" class="table table-bordered table-hover">
             <thead>
-            <tr>
-                <th>Mã học phần</th>
-                <th>Tên học phần</th>
-                <th>Số tín chỉ</th>
-                <th>Thao tác</th>
-            </tr>
+                <tr>
+                    <th>Mã học phần</th>
+                    <th>Tên học phần</th>
+                    <th>Số tín chỉ</th>
+                    <th>Thao tác</th>
+                </tr>
             </thead>
             <tbody>
-            <?php foreach ($data['list'] as $hocphan): ?>
-                <tr>
-                    <td><?= $hocphan['mahocphan'];?></td>
-                    <td><?= $hocphan['tenhocphan'];?></td>
-                    <td><?= $hocphan['sotinchi'];?></td>
-                    <td><button type="button" class="btn btn-danger btn-sm" data-toggle="modal" id="btn-modal-xoa" data-xoa_mahocphan="<?= $hocphan['mahocphan'];?>" data-xoa_tenhocphan="<?= $hocphan['tenhocphan'];?>" data-target="#modal-xoa"> <i class="fa fa-trash-o"></i> Xóa</button></td>
-                </tr>
-            <?php endforeach; ?>
+                <?php foreach ($data['list'] as $hocphan) : ?>
+                    <tr>
+                        <td><?= $hocphan['mahocphan']; ?></td>
+                        <td><?= $hocphan['tenhocphan']; ?></td>
+                        <td><?= $hocphan['sotinchi']; ?></td>
+                        <td><button type="button" class="btn btn-danger btn-sm" data-toggle="modal" id="btn-modal-xoa" data-xoa_mahocphan="<?= $hocphan['mahocphan']; ?>" data-xoa_tenhocphan="<?= $hocphan['tenhocphan']; ?>" data-target="#modal-xoa"> <i class="fa fa-trash-o"></i> Xóa</button></td>
+                    </tr>
+                <?php endforeach; ?>
             </tbody>
             <tfoot>
-            <tr>
-                <th>Mã học phần</th>
-                <th>Tên học phần</th>
-                <th>Số tín chỉ</th>
-                <th>Thao tác</th>
-            </tr>
+                <tr>
+                    <th>Mã học phần</th>
+                    <th>Tên học phần</th>
+                    <th>Số tín chỉ</th>
+                    <th>Thao tác</th>
+                </tr>
             </tfoot>
         </table>
     </div>
@@ -48,13 +48,14 @@
                 <h4 class="modal-title">Thêm học phần mới</h4>
             </div>
             <div class="modal-body">
-                <form id="frm_them" role="form" method="post" action="./index.php?url=chitiet/them">
+                <form id="frm_them" role="form" method="post" action="<?= DOMAIN ?>chitiet/them">
                     <input type="hidden" name="id" value="<?= $_GET['id']; ?>">
                     <div class="form-group">
                         <label>Chọn học phần</label>
-                        <select name="mahocphan[]" class="form-control" multiple size="10"><?php foreach ($data['hocphan'] as $hocphan): ?>
-                            <option value="<?= $hocphan['mahocphan'];?>"><?= $hocphan['mahocphan']." - ".$hocphan['tenhocphan'];?></option>
-                        <?php endforeach; ?></select>
+                        <select name="mahocphan[]" class="form-control" multiple size="10"><?php foreach ($data['hocphan'] as $hocphan) : ?>
+                                <option value="<?= $hocphan['mahocphan']; ?>"><?= $hocphan['mahocphan'] . " - " . $hocphan['tenhocphan']; ?></option>
+                            <?php endforeach; ?>
+                        </select>
                     </div>
                 </form>
             </div>
@@ -79,7 +80,7 @@
                 <h4 class="modal-title">Xóa học phần</h4>
             </div>
             <div class="modal-body">
-                <form id="frm_xoa" role="form" method="post" action="./index.php?url=chitiet/xoa">
+                <form id="frm_xoa" role="form" method="post" action="<?= DOMAIN ?>chitiet/xoa">
                     <input type="hidden" name="id" value="<?= $_GET['id']; ?>">
                     <div class="form-group">
                         <label>Mã học phần</label>
@@ -88,7 +89,7 @@
 
                     <div class="form-group">
                         <label>Tên học phần</label>
-                        <input type="text" readonly name="xoa_tenhocphan" id="xoa_tenhocphan"  class="form-control" placeholder="Nhập tên học phần ...">
+                        <input type="text" readonly name="xoa_tenhocphan" id="xoa_tenhocphan" class="form-control" placeholder="Nhập tên học phần ...">
                     </div>
                 </form>
             </div>
@@ -105,34 +106,55 @@
 
 
 <script>
-    $('#modal-xoa').on('show.bs.modal', function(e) {
-        var xoa_mahocphan = $(e.relatedTarget).data('xoa_mahocphan');
-        var xoa_tenhocphan = $(e.relatedTarget).data('xoa_tenhocphan');
-
-        $(e.currentTarget).find('#xoa_mahocphan').val(xoa_mahocphan);
-        $(e.currentTarget).find('#xoa_tenhocphan').val(xoa_tenhocphan);
-    });
-
-    $(function () {
-
+    $(function() {
         $('#table').DataTable({
             dom: 'Bfrtip',
             "pageLength": 10,
             "language": {
-                "search":"Tìm kiếm",
+                "search": "Tìm kiếm",
                 "lengthMenu": "Hiện _MENU_ dòng mỗi trang",
                 "zeroRecords": "Không tìm thấy",
                 "info": "Hiện (_START_ - _END_) trong tổng số _TOTAL_. Trang _PAGE_ / _PAGES_",
                 "infoEmpty": "Không có dữ liệu",
                 "infoFiltered": "(đã lọc từ _MAX_ dữ liệu)",
                 "paginate": {
-                    "first":"Trang đầu",
-                    "last":"Trang cuối",
-                    "next":"Sau",
-                    "previous":"Trước"
+                    "first": "Trang đầu",
+                    "last": "Trang cuối",
+                    "next": "Sau",
+                    "previous": "Trước"
                 },
             },
-        })
-    })
+        });
+        $('#modal-xoa').on('show.bs.modal', function(e) {
+            var xoa_mahocphan = $(e.relatedTarget).data('xoa_mahocphan');
+            var xoa_tenhocphan = $(e.relatedTarget).data('xoa_tenhocphan');
 
+            $(e.currentTarget).find('#xoa_mahocphan').val(xoa_mahocphan);
+            $(e.currentTarget).find('#xoa_tenhocphan').val(xoa_tenhocphan);
+        });
+
+        <?php
+        if (isset($_GET['msg'])) {
+            if ($_GET['msg'] == 'themthanhcong')
+                $msg = ['icon' => 'success', 'title' => 'Đã thêm học phần!'];
+            elseif ($_GET['msg'] == 'themloi' || $_GET['msg'] == 'xoaloi')
+                $msg = ['icon' => 'error', 'title' => 'Có lỗi xảy ra!'];
+            elseif ($_GET['msg'] == 'xoathanhcong')
+                $msg = ['icon' => 'success', 'title' => 'Đã xóa học phần!'];
+            if ($msg) {
+        ?>
+                Swal.fire({
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 5000,
+                    icon: '<?= $msg['icon'] ?>',
+                    title: '<?= $msg['title'] ?>',
+                })
+        <?php
+            }
+        }
+        ?>
+
+    })
 </script>

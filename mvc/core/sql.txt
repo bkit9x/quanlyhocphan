@@ -1,0 +1,72 @@
+SELECT `idcaytientrinh`, `tencaytientrinh`, `tenkhoa` FROM `caytientrinh` WHERE 1
+SELECT `idcaytientrinh`, `tencaytientrinh`, `tenkhoa` FROM `caytientrinh` WHERE 1
+SELECT `idcaytientrinh`, `tencaytientrinh`, `tenkhoa` FROM `caytientrinh` WHERE 1
+SELECT `sv`.`hoten` as `sinhvien`, `sv`.`taikhoan` as `idsinhvien`, `gv`.`hoten` as `giaovien`, `gv`.`taikhoan` as `idgiaovien` FROM `chunhiem`, `taikhoan` as `sv`, `taikhoan` as `gv` WHERE `chunhiem`.`idsinhvien` = `sv`.`taikhoan` AND `chunhiem`.`idgiaovien` = `gv`.`taikhoan`;
+SELECT `taikhoan`, `hoten` FROM `taikhoan` WHERE `loaitaikhoan` = '3'
+SELECT `taikhoan`, `hoten` FROM `taikhoan` WHERE `loaitaikhoan` = '2'
+SELECT `mahocphan`, `tenhocphan`, `sotinchi`, `hocphantienquyet` as mahocphantienquyet FROM `hocphan`;
+SELECT `tenhocphan` FROM `hocphan` WHERE `mahocphan` = 'CB1106';
+SELECT `tenhocphan` FROM `hocphan` WHERE `mahocphan` = 'CB1107';
+SELECT `tenhocphan` FROM `hocphan` WHERE `mahocphan` = 'CB1108';
+SELECT `tenhocphan` FROM `hocphan` WHERE `mahocphan` = 'CB1109';
+SELECT `tenhocphan` FROM `hocphan` WHERE `mahocphan` = 'CB1111';
+SELECT `tenhocphan` FROM `hocphan` WHERE `mahocphan` = 'CT1101';
+SELECT `tenhocphan` FROM `hocphan` WHERE `mahocphan` = 'CT1102';
+SELECT `tenhocphan` FROM `hocphan` WHERE `mahocphan` = 'CT1101';
+SELECT `tenhocphan` FROM `hocphan` WHERE `mahocphan` = 'CB1110';
+SELECT `tenhocphan` FROM `hocphan` WHERE `mahocphan` = 'CT1105';
+SELECT `tenhocphan` FROM `hocphan` WHERE `mahocphan` = 'CT1103';
+SELECT `tenhocphan` FROM `hocphan` WHERE `mahocphan` = 'QP1101';
+SELECT `tenhocphan` FROM `hocphan` WHERE `mahocphan` = 'QP1102';
+SELECT `tenhocphan` FROM `hocphan` WHERE `mahocphan` = 'TC1101';
+SELECT `tenhocphan` FROM `hocphan` WHERE `mahocphan` = 'TC111M';
+SELECT `tenhocphan` FROM `hocphan` WHERE `mahocphan` = 'DT1229';
+SELECT `tenhocphan` FROM `hocphan` WHERE `mahocphan` = 'TH1219';
+SELECT `tenhocphan` FROM `hocphan` WHERE `mahocphan` = 'TH1205';
+SELECT `tenhocphan` FROM `hocphan` WHERE `mahocphan` = 'TH1219';
+SELECT `tenhocphan` FROM `hocphan` WHERE `mahocphan` = 'TH1209';
+SELECT `tenhocphan` FROM `hocphan` WHERE `mahocphan` = 'TH1212';
+SELECT `tenhocphan` FROM `hocphan` WHERE `mahocphan` = 'TH1206';
+SELECT `tenhocphan` FROM `hocphan` WHERE `mahocphan` = 'TH1208';
+SELECT `tenhocphan` FROM `hocphan` WHERE `mahocphan` = 'TH1214';
+SELECT `tenhocphan` FROM `hocphan` WHERE `mahocphan` = 'TH1208';
+SELECT `tenhocphan` FROM `hocphan` WHERE `mahocphan` = 'TH1201';
+SELECT `tenhocphan` FROM `hocphan` WHERE `mahocphan` = 'TH1307';
+SELECT `tenhocphan` FROM `hocphan` WHERE `mahocphan` = 'TH1207';
+SELECT `tenhocphan` FROM `hocphan` WHERE `mahocphan` = 'TH1209';
+SELECT `tenhocphan` FROM `hocphan` WHERE `mahocphan` = 'TH1316';
+SELECT `tenhocphan` FROM `hocphan` WHERE `mahocphan` = 'TH1215';
+SELECT `tenhocphan` FROM `hocphan` WHERE `mahocphan` = 'TH1219';
+SELECT `tenhocphan` FROM `hocphan` WHERE `mahocphan` = 'TH1212';
+SELECT `tenhocphan` FROM `hocphan` WHERE `mahocphan` = 'TH1211';
+SELECT `tenhocphan` FROM `hocphan` WHERE `mahocphan` = 'TH1209';
+SELECT `tenhocphan` FROM `hocphan` WHERE `mahocphan` = 'TH1337';
+SELECT `tenhocphan` FROM `hocphan` WHERE `mahocphan` = 'TH1305';
+SELECT `tenhocphan` FROM `hocphan` WHERE `mahocphan` = 'TH1324';
+SELECT `tenhocphan` FROM `hocphan` WHERE `mahocphan` = 'TH1316';
+SELECT `tenhocphan` FROM `hocphan` WHERE `mahocphan` = 'TH1215';
+SELECT `tenhocphan` FROM `hocphan` WHERE `mahocphan` = 'TH1215';
+SELECT `tenhocphan` FROM `hocphan` WHERE `mahocphan` = 'TH1316';
+SELECT `tenhocphan` FROM `hocphan` WHERE `mahocphan` = 'TH1507';
+SELECT `tenhocphan` FROM `hocphan` WHERE `mahocphan` = 'TH1508';
+SELECT `tenhocphan` FROM `hocphan` WHERE `mahocphan` = 'TH1508';
+SELECT `tenhocphan` FROM `hocphan` WHERE `mahocphan` = 'TH1340';
+SELECT taikhoan, hoten, tenloaitaikhoan, idloaitaikhoan FROM `taikhoan`, `loaitaikhoan` WHERE `taikhoan` = 'user0' AND `matkhau` = 'e10adc3949ba59abbe56e057f20f883e' AND `idloaitaikhoan` = `loaitaikhoan`
+SELECT `hocphan`.`mahocphan`, `hocphan`.`tenhocphan`, `hocphan`.`sotinchi`, `diem`.`diem` FROM `hocphan`, `diem` WHERE `diem`.`idhocphan` = `hocphan`.`mahocphan` AND `diem`.`idsinhvien`='user0';
+SELECT COUNT(*) as `count`, SUM(`hocphan`.`sotinchi`) as `sum` FROM `hocphan`, `caytientrinh_hocphan`, `caytientrinh_sinhvien` WHERE `caytientrinh_hocphan`.`mahocphan` = `hocphan`.`mahocphan` AND `caytientrinh_hocphan`.`idcaytientrinh` = `caytientrinh_sinhvien`.`idcaytientrinh` AND `caytientrinh_sinhvien`.`idsinhvien`='user0' AND `hocphan`.`mahocphan` NOT IN(SELECT `diem`.`idhocphan` FROM `diem` WHERE `diem`.`idsinhvien`='user0');
+SELECT COUNT(*) as `count`, SUM(`hocphan`.`sotinchi`) as `sum` FROM `hocphan`, `diem` WHERE `diem`.`idhocphan` = `hocphan`.`mahocphan` AND `diem`.`idsinhvien`='user0';
+SELECT COUNT(*) as `count`, SUM(`hocphan`.`sotinchi`) as `sum` FROM `hocphan`, `diem` WHERE `diem`.`idhocphan` = `hocphan`.`mahocphan` AND `diem`.`diem` < 4 AND `diem`.`idsinhvien`='user0';
+SELECT `diem`, `hocphan`.`tenhocphan`, `hocphan`.`sotinchi` FROM `diem`, `hocphan` WHERE `diem`.`idhocphan` = `hocphan`.`mahocphan` AND `diem`.`idsinhvien` = 'user0';
+SELECT COUNT(*) as `count`, SUM(`hocphan`.`sotinchi`) as `sum` FROM `hocphan`, `caytientrinh_hocphan`, `caytientrinh_sinhvien` WHERE `caytientrinh_hocphan`.`mahocphan` = `hocphan`.`mahocphan` AND `caytientrinh_hocphan`.`idcaytientrinh` = `caytientrinh_sinhvien`.`idcaytientrinh` AND `caytientrinh_sinhvien`.`idsinhvien`='user0' AND `hocphan`.`mahocphan` NOT IN(SELECT `diem`.`idhocphan` FROM `diem` WHERE `diem`.`idsinhvien`='user0');
+SELECT COUNT(*) as `count`, SUM(`hocphan`.`sotinchi`) as `sum` FROM `hocphan`, `diem` WHERE `diem`.`idhocphan` = `hocphan`.`mahocphan` AND `diem`.`idsinhvien`='user0';
+SELECT COUNT(*) as `count`, SUM(`hocphan`.`sotinchi`) as `sum` FROM `hocphan`, `diem` WHERE `diem`.`idhocphan` = `hocphan`.`mahocphan` AND `diem`.`diem` < 4 AND `diem`.`idsinhvien`='user0';
+SELECT `diem`, `hocphan`.`tenhocphan`, `hocphan`.`sotinchi` FROM `diem`, `hocphan` WHERE `diem`.`idhocphan` = `hocphan`.`mahocphan` AND `diem`.`idsinhvien` = 'user0';
+SELECT COUNT(*) as `count`, SUM(`hocphan`.`sotinchi`) as `sum` FROM `hocphan`, `caytientrinh_hocphan`, `caytientrinh_sinhvien` WHERE `caytientrinh_hocphan`.`mahocphan` = `hocphan`.`mahocphan` AND `caytientrinh_hocphan`.`idcaytientrinh` = `caytientrinh_sinhvien`.`idcaytientrinh` AND `caytientrinh_sinhvien`.`idsinhvien`='user0' AND `hocphan`.`mahocphan` NOT IN(SELECT `diem`.`idhocphan` FROM `diem` WHERE `diem`.`idsinhvien`='user0');
+SELECT COUNT(*) as `count`, SUM(`hocphan`.`sotinchi`) as `sum` FROM `hocphan`, `diem` WHERE `diem`.`idhocphan` = `hocphan`.`mahocphan` AND `diem`.`idsinhvien`='user0';
+SELECT COUNT(*) as `count`, SUM(`hocphan`.`sotinchi`) as `sum` FROM `hocphan`, `diem` WHERE `diem`.`idhocphan` = `hocphan`.`mahocphan` AND `diem`.`diem` < 4 AND `diem`.`idsinhvien`='user0';
+SELECT `diem`, `hocphan`.`tenhocphan`, `hocphan`.`sotinchi` FROM `diem`, `hocphan` WHERE `diem`.`idhocphan` = `hocphan`.`mahocphan` AND `diem`.`idsinhvien` = 'user0';
+SELECT COUNT(*) as `count`, SUM(`hocphan`.`sotinchi`) as `sum` FROM `hocphan`, `caytientrinh_hocphan`, `caytientrinh_sinhvien` WHERE `caytientrinh_hocphan`.`mahocphan` = `hocphan`.`mahocphan` AND `caytientrinh_hocphan`.`idcaytientrinh` = `caytientrinh_sinhvien`.`idcaytientrinh` AND `caytientrinh_sinhvien`.`idsinhvien`='user0' AND `hocphan`.`mahocphan` NOT IN(SELECT `diem`.`idhocphan` FROM `diem` WHERE `diem`.`idsinhvien`='user0');
+SELECT COUNT(*) as `count`, SUM(`hocphan`.`sotinchi`) as `sum` FROM `hocphan`, `diem` WHERE `diem`.`idhocphan` = `hocphan`.`mahocphan` AND `diem`.`idsinhvien`='user0';
+SELECT COUNT(*) as `count`, SUM(`hocphan`.`sotinchi`) as `sum` FROM `hocphan`, `diem` WHERE `diem`.`idhocphan` = `hocphan`.`mahocphan` AND `diem`.`diem` < 4 AND `diem`.`idsinhvien`='user0';
+SELECT `diem`, `hocphan`.`tenhocphan`, `hocphan`.`sotinchi` FROM `diem`, `hocphan` WHERE `diem`.`idhocphan` = `hocphan`.`mahocphan` AND `diem`.`idsinhvien` = 'user0';
+SELECT taikhoan, hoten, tenloaitaikhoan, idloaitaikhoan FROM `taikhoan`, `loaitaikhoan` WHERE `taikhoan` = 'user0' AND `matkhau` = 'e10adc3949ba59abbe56e057f20f883e' AND `idloaitaikhoan` = `loaitaikhoan`

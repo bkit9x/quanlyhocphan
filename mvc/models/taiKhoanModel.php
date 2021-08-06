@@ -1,16 +1,17 @@
 <?php
 class taiKhoanModel extends DB
 {
-    public function index() {
+    public function index()
+    {
         $result = $this->query("SELECT `taikhoan`, `matkhau`, `hoten`, `tenloaitaikhoan` FROM `taikhoan`, `loaitaikhoan` WHERE `taikhoan`.`loaitaikhoan` = `loaitaikhoan`.`idloaitaikhoan`");
         $arr = array();
         if ($result && $result->num_rows > 0)
             while ($row = $result->fetch_assoc())
                 $arr[] = $row;
         return $arr;
-
     }
-    public function capnhat() {
+    public function capnhat()
+    {
         if ($_SESSION['idloaitaikhoan'] == '1')
             $_GET['u'] = isset($_GET['u']) ? $_GET['u'] : $_SESSION['taikhoan'];
         else
@@ -19,9 +20,9 @@ class taiKhoanModel extends DB
         $result = $this->query("SELECT `taikhoan`,`hoten`, `loaitaikhoan` FROM `taikhoan` WHERE `taikhoan`='$taikhoan'");
         if ($result && $result->num_rows > 0)
             return $result->fetch_assoc();
-
     }
-    public function dangnhap() {
+    public function dangnhap()
+    {
         if (isset($_POST['taikhoan']) && isset($_POST['matkhau'])) {
             $taikhoan = addslashes($_POST['taikhoan']);
             $matkhau = md5($_POST['matkhau']);
@@ -32,16 +33,15 @@ class taiKhoanModel extends DB
                     $_SESSION["hoten"] = $row['hoten'];
                     $_SESSION["loaitaikhoan"] = $row['tenloaitaikhoan'];
                     $_SESSION["idloaitaikhoan"] = $row['idloaitaikhoan'];
-                    header("Location: ".DOMAIN);
+                    header("Location: " . DOMAIN);
                     return "Đăng nhập thành công";
-                }
-                else
+                } else
                     return "Sai tài khoản hoặc mật khẩu";
-        }
-        else
+        } else
             return NULL;
     }
-    public function dangky() {
+    public function dangky()
+    {
         if (isset($_POST['taikhoan']) && isset($_POST['matkhau']) && isset($_POST['hoten'])) {
             $taikhoan = addslashes($_POST['taikhoan']);
             $hoten = addslashes($_POST['hoten']);
@@ -51,8 +51,8 @@ class taiKhoanModel extends DB
                 return "Tài khoản này đã tồn tại";
             } else {
                 $result = $this->query("INSERT INTO taikhoan (`taikhoan`, `matkhau`, `hoten`, `loaitaikhoan`) VALUES('$taikhoan', '$matkhau', '$hoten', '3')");
-                if ($result){
-                    header("Location: ".DOMAIN.'index.php?url=taikhoan/dangnhap');
+                if ($result) {
+                    header("Location: " . DOMAIN . 'index.php?url=taikhoan/dangnhap');
                     return "Đăng ký thành công";
                 }
             }
@@ -60,15 +60,16 @@ class taiKhoanModel extends DB
             return NULL;
         }
     }
-    public function dangxuat() {
+    public function dangxuat()
+    {
         unset($_SESSION["taikhoan"]);
         unset($_SESSION["hoten"]);
         unset($_SESSION["loaitaikhoan"]);
         unset($_SESSION["idloaitaikhoan"]);
-        
     }
 
-    public function loaitaikhoan(){
+    public function loaitaikhoan()
+    {
         $arr = array();
         $result = $this->query("SELECT * FROM `loaitaikhoan`");
         if ($result && $result->num_rows > 0)
@@ -77,34 +78,31 @@ class taiKhoanModel extends DB
         return $arr;
     }
 
-    public function sua(){
-        if (isset($_POST['taikhoan']) && isset($_POST['hoten']))
-        {
+    public function sua()
+    {
+        if (isset($_POST['taikhoan']) && isset($_POST['hoten'])) {
             $taikhoan = addslashes($_POST['taikhoan']);
             $hoten = addslashes($_POST['hoten']);
             $matkhau = md5($_POST['matkhau']);
             $matkhaumoi = md5($_POST['matkhaumoi']);
             $doiloai = "";
-            if(isset($_POST['loaitaikhoan'])){
+            if (isset($_POST['loaitaikhoan'])) {
                 $loaitaikhoan = addslashes($_POST['loaitaikhoan']);
                 $doiloai = ", `loaitaikhoan` = '$loaitaikhoan'";
             }
-            if (isset($_POST['matkhau']) && $_POST['matkhau'] != '' && isset($_POST['matkhaumoi']) && $_POST['matkhaumoi'] != ''){
+            if (isset($_POST['matkhau']) && $_POST['matkhau'] != '' && isset($_POST['matkhaumoi']) && $_POST['matkhaumoi'] != '') {
                 $kt = $this->query("SELECT hoten FROM `taikhoan` WHERE `taikhoan` = '$taikhoan' AND `matkhau` = '$matkhau'");
                 if ($kt && $kt->num_rows > 0)
                     $sql = "UPDATE `taikhoan` SET `matkhau` = '$matkhaumoi', `hoten` = '$hoten'$doiloai WHERE `taikhoan`.`taikhoan` = '$taikhoan'";
                 else
-                    header("Location: /index.php?url=taikhoan/index&msg=matkhaukhongdung&u=".$taikhoan);
-            }
-            else
+                    header("Location: " . DOMAIN . "taikhoan/capnhat?msg=matkhaukhongdung&u=" . $taikhoan);
+            } else
                 $sql = "UPDATE `taikhoan` SET `hoten` = '$hoten'$doiloai WHERE `taikhoan`.`taikhoan` = '$taikhoan'";
 
             $result = $this->query($sql);
             if ($result)
-                header("Location: /index.php?url=taikhoan/index&msg=suathanhcong&u=".$taikhoan);
-        }
-        else
-            header("Location: ".$_SERVER['HTTP_REFERER'].'&msg=sualoi');
+                header("Location: " . DOMAIN . "taikhoan/capnhat?msg=thanhcong&u=" . $taikhoan);
+        } else
+            header("Location: " . DOMAIN . "taikhoan/capnhat?msg=loi");
     }
-
 }

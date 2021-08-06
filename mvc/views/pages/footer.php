@@ -1,4 +1,3 @@
-
 </section>
 <!-- /.content -->
 </div>
@@ -12,13 +11,10 @@
 </footer>
 <!-- ./wrapper -->
 
-<script>
-    $.widget.bridge('uibutton', $.ui.button);
-</script>
 <!-- Bootstrap 3.3.7 -->
-<script src="<?php echo DOMAIN;?>public/bootstrap/dist/js/bootstrap.min.js"></script>
-<!-- datepicker -->
-<script src="<?php echo DOMAIN;?>public/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
-<script src="<?php echo DOMAIN;?>public/dist/js/adminlte.min.js"></script>
+<script src="<?= DOMAIN ?>public/bootstrap/dist/js/bootstrap.min.js"></script>
+<!-- adminlte -->
+<script src="<?= DOMAIN ?>public/dist/js/adminlte.min.js"></script>
 </body>
+
 </html>

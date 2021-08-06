@@ -1,5 +1,15 @@
 .add-btn{
-    margin-bottom: 100%;
     position: absolute;
     display: inline-block;
+}
+.swal2-popup {
+    font-size: 1.6rem !important;
+}
+@media (max-width: 576px) {
+    .add-btn{
+        position: relative;
+        margin: 5px;
+        display: inline-block;
+    }
+    
 }

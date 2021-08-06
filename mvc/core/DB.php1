@@ -1,0 +1,24 @@
+<?php
+class DB
+{
+    public $con;
+    protected $servername = "localhost";
+    protected $username = 'khacodes_admin';
+    protected $password = 'gsQXQ8fA5c6_wYM';
+    protected $dbname = 'khacodes_quanlyhocphan';
+
+    public function __construct()
+    {
+        $this-> con = mysqli_connect($this->servername, $this->username, $this->password, $this->dbname);
+        if ($this-> con -> connect_errno) {
+            echo "Failed to connect to MySQL: " . $this->con-> connect_error;
+            exit();
+        }
+        mysqli_query($this->con, "SET NAMES 'utf8'");
+    }
+    public function query($query)
+    {
+        return $this->con->query($query);
+    }
+}
+

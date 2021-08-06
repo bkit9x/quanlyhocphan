@@ -29,20 +29,19 @@ class sinhVienModel extends DB
         if (isset($_POST['sua_idsinhvien']) && isset($_POST['sua_idcaytientrinh'])) {
             $idcaytientrinh = addslashes($_POST['sua_idcaytientrinh']);
             $idsinhvien = addslashes($_POST['sua_idsinhvien']);
-            if (isset($_POST['sua_idcaytientrinh_old']) && $_POST['sua_idcaytientrinh_old'] != ''){
+            if (isset($_POST['sua_idcaytientrinh_old']) && $_POST['sua_idcaytientrinh_old'] != '') {
                 $idcaytientrinh_old = addslashes($_POST['sua_idcaytientrinh_old']);
                 $sql = "UPDATE `caytientrinh_sinhvien` SET `idcaytientrinh` = '$idcaytientrinh' WHERE `idcaytientrinh` = '$idcaytientrinh_old' AND  `idsinhvien` = '$idsinhvien'";
-            }
-            else{
+            } else {
                 $sql = "INSERT INTO `caytientrinh_sinhvien` (`idsinhvien`, `idcaytientrinh`) VALUES ('$idsinhvien', '$idcaytientrinh')";
             }
             $result = $this->query($sql);
             if ($result)
-                header("Location: /index.php?url=sinhvien/index&msg=suathanhcong");
+                header("Location: " . DOMAIN . "sinhvien/index&msg=suathanhcong");
             else
-                header("Location: /index.php?url=sinhvien/index&msg=sualoi");
-        }
-        header("Location: /index.php?url=sinhvien/index&msg=sualoi");
+                header("Location: " . DOMAIN . "sinhvien/index&msg=sualoi");
+        } else
+            header("Location: " . DOMAIN . "sinhvien/index&msg=sualoi");
     }
 
     public function danhsachcaytientrinh()

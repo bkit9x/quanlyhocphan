@@ -3,38 +3,31 @@ include_once 'config.php';
 class App
 {
     protected $controller;
-    protected $d_controller="trangchu";
-    protected $action="index";
+    protected $d_controller = "trangchu";
+    protected $action = "index";
 
     public function __construct()
     {
         $arr = $this->UrlProcess();
         $error = false;
 
-        if (is_array($arr))
-        {
-            if (file_exists("./mvc/controllers/".$arr[0].".php"))
-            {
-                require_once "./mvc/controllers/". $arr[0] .".php";
+        if (is_array($arr)) {
+            if (file_exists("./mvc/controllers/" . $arr[0] . ".php")) {
+                require_once "./mvc/controllers/" . $arr[0] . ".php";
                 $this->controller = new $arr[0];
-                if (isset($arr[1]) && method_exists($this->controller, $arr[1]))
-                {
+                if (isset($arr[1]) && method_exists($this->controller, $arr[1])) {
                     call_user_func_array([$this->controller, $arr[1]], []);
                     unset($arr);
-                }
-                else
+                } else
                     $error = true;
-            }
-            else
+            } else
                 $error = true;
-        }
-        else
+        } else
             $error = true;
-        if ($error)
-        {
-            require_once "./mvc/controllers/". $this->d_controller .".php";
+        if ($error) {
+            require_once "./mvc/controllers/" . $this->d_controller . ".php";
             $this->controller = new $this->d_controller;
-            call_user_func_array([$this->controller, $this->action],[]);
+            call_user_func_array([$this->controller, $this->action], []);
         }
     }
 

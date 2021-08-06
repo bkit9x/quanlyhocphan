@@ -1,10 +1,10 @@
 <!-- /.dangnhap-logo -->
 <div class="login-box-body">
     <p class="login-box-msg">Đăng nhập</p>
-    <?php if ($data): ?>
-    <p class="text-red"><?= $data;?></p>
+    <?php if ($data) : ?>
+        <p class="text-red"><?= $data; ?></p>
     <?php endif; ?>
-    <form action="<?= DOMAIN ?>index.php?url=taikhoan/dangnhap" method="post">
+    <form action="<?=DOMAIN?>taikhoan/dangnhap" method="post">
         <div class="form-group has-feedback">
             <input type="text" name="taikhoan" class="form-control" placeholder="Tài khoản">
             <span class="glyphicon glyphicon-user form-control-feedback"></span>
@@ -22,7 +22,7 @@
     </form>
 
     <a href="#">Quên mật khẩu</a><br>
-    <a href="<?= DOMAIN ?>index.php?url=taikhoan/dangky" class="text-center">Tạo tài khoản</a>
+    <a href="<?=DOMAIN?>taikhoan/dangky" class="text-center">Tạo tài khoản</a>
 
 </div>
 <!-- /.dangnhap-box-body -->
