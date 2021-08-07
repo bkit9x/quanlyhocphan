@@ -2,7 +2,9 @@
 
 use PhpOffice\PhpSpreadsheet\IOFactory;
 
-class diemModel extends DB
+require_once 'readFilter.php';
+
+class spreadSheetModel extends DB
 {
     public function index()
     {
@@ -42,10 +44,11 @@ class diemModel extends DB
     public function nhap()
     {
         $inputFileType = 'Xlsx';
-        $inputFileName = __DIR__ . '/upload/file.xlsx';
+        $inputFileName = '././upload/file.xlsx';
         $sheetname = 'Mau DT05b';
         $startRow = 6;
-        $endRow = 76;
+        $soluongsinhvien = 65;
+        $endRow = 9 + $soluongsinhvien;
 
         $filterSubset = new MyReadFilter($startRow, $endRow);
 
@@ -56,6 +59,7 @@ class diemModel extends DB
         $sheetData = $spreadsheet->getActiveSheet()->toArray();
 
         $diem = array();
+        $loi = array();
         for ($row = 9; $row <= $endRow; $row++) {
             if ($sheetData[$row][1]) {
                 $mssv = $sheetData[$row][1];
@@ -64,13 +68,34 @@ class diemModel extends DB
                 for ($col = 3; $col < count($sheetData[$row]) - 1; $col++) {
                     $value = $sheetData[$row][$col];
                     if (is_numeric($value)) {
+                        $value = (float) $value;
                         $mamon = $sheetData[5][$col - 1];
                         $mamon = explode(' ', $mamon)[0];
                         $diem[$mssv][$mamon] = $value;
+                        var_dump($value);
+                        if (!$this->nhapdiemchosinhvien($mssv, $mamon, $value)) {
+                            $loi[] = array("Sinh viên $mssv môn $mamon điểm $value");
+                        }
                     }
                 }
             }
         }
-        var_dump($diem);
+        var_dump($loi);
+    }
+
+    public function nhapdiemchosinhvien($sinhvien, $mahocphan, $diem)
+    {
+        if ($diem <= 4) {
+            $select = $this->query("SELECT `diem` FROM `diem` WHERE `idhocphan`='$mahocphan' AND `idsinhvien`='$sinhvien'");
+            if ($select && $select->num_rows > 0)
+                $result = $this->query("UPDATE `diem` SET `diem` = '$diem' WHERE `diem`.`idhocphan` = '$mahocphan' AND `diem`.`idsinhvien` = '$sinhvien'");
+            else
+                $result = $this->query("INSERT INTO `diem` (`idhocphan`, `idsinhvien`, `diem`) VALUES ('$mahocphan', '$sinhvien', '$diem');");
+            if ($result)
+                return true;
+            else
+                return false;
+        } else
+            return false;
     }
 }

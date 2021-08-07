@@ -1,7 +1,16 @@
 <div class="row">
-    <div class="col-md-4 col-sm-6 col-xs-6">
+    <div class="col-xs-12">
+        <div class="box box-solid">
+            <div class="box-body">
+                <h4 class="text"><strong>Mã số: </strong><?= $data['taikhoan']['taikhoan'] ?> <strong>Họ tên: </strong><?= $data['taikhoan']['hoten'] ?></h4>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-3 col-sm-6 col-xs-6">
         <div class="info-box">
-            <span class="info-box-icon bg-green"><i class="fa fa-check"></i></span>
+            <span class="info-box-icon bg-green"><i class="fa fa-book"></i></span>
             <div class="info-box-content">
                 <span class="info-box-text">
                     <h4>Đã học</h4>
@@ -13,28 +22,46 @@
         <!-- /.info-box -->
     </div>
 
-    <div class="col-md-4 col-sm-6 col-xs-6">
+    <div class="col-md-3 col-sm-6 col-xs-6">
         <div class="info-box">
             <span class="info-box-icon bg-aqua"><i class="fa fa-circle-o"></i></span>
             <div class="info-box-content">
                 <span class="info-box-text">
                     <h4>Chưa học</h4>
                 </span>
-                <span class="info-box-number"><?= $data['list']['chuahoc']['tinchi']; ?><small> tín chỉ</small></span>
+                <span class="info-box-number"><?= $data['list']['chuahoc']['tinchi'] ?: 0; ?><small> tín chỉ</small></span>
             </div>
             <!-- /.info-box-content -->
         </div>
         <!-- /.info-box -->
     </div>
 
-    <div class="col-md-4 col-sm-6 col-xs-6">
+    <div class="col-md-3 col-sm-6 col-xs-6">
         <div class="info-box">
-            <span class="info-box-icon bg-red"><i class="fa fa-times"></i></span>
+            <span class="info-box-icon bg-yellow"><i class="fa fa-check"></i></span>
             <div class="info-box-content">
                 <span class="info-box-text">
-                    <h4>Chưa đạt</h4>
+                    <h4>Tích lũy</h4>
                 </span>
-                <span class="info-box-number"><?= $data['list']['chuadat']['tinchi']; ?><small> tín chỉ</small></span>
+                <span class="info-box-number"><?= $data['list']['dahoc']['tinchi'] - $data['list']['chuadat']['tinchi']; ?><small> tín chỉ</small></span>
+            </div>
+            <!-- /.info-box-content -->
+        </div>
+        <!-- /.info-box -->
+    </div>
+
+    <div class="col-md-3 col-sm-6 col-xs-6">
+        <div class="info-box">
+            <span class="info-box-icon bg-red"><i class="fa fa-align-center"></i></span>
+            <div class="info-box-content">
+                <span class="info-box-text">
+                    <h4>ĐTB tích lũy</h4>
+                </span>
+                <span class="info-box-number">
+                    <?php
+                    $dtb = 0;
+                    foreach ($data['list']['diem'] as $diem) $dtb += $diem['diem'];
+                    echo round($dtb / $data['list']['dahoc']['tinchi'], 2); ?></span>
             </div>
             <!-- /.info-box-content -->
         </div>

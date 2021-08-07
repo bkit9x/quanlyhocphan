@@ -21,7 +21,9 @@ class thongke extends Controller
     public function tongquat()
     {
         $model = $this->model("thongKeModel")->tongquat();
-        $this->view("thongke/tongquat", ["list" => $model], ["title" => "Thống kê tổng quát", ["link" => "thongke/index", "title" => "Thống kê"]]);
+        $taikhoan = $this->model("thongKeModel")->thongtintaikhoan();
+
+        $this->view("thongke/tongquat", ["list" => $model, "taikhoan" => $taikhoan], ["title" => "Thống kê tổng quát", ["link" => "thongke/index", "title" => "Thống kê"]]);
     }
 
 

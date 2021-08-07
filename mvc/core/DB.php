@@ -5,7 +5,7 @@ class DB
     protected $servername = "mysql";
     protected $username = 'root';
     protected $password = 'password';
-    protected $dbname = 'quanlyhocphan';
+    protected $dbname = 'quanlihocphan';
 
     public function __construct()
     {

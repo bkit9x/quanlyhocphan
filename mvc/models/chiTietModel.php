@@ -5,7 +5,7 @@ class chiTietModel extends DB
     {
         $id = (int) $_GET['id'];
         $arr = array();
-        $result = $this->query("SELECT `hocphan`.`mahocphan`, `tenhocphan`, `sotinchi` FROM `hocphan`, `caytientrinh_hocphan` WHERE `caytientrinh_hocphan`.`mahocphan` = `hocphan`.`mahocphan` AND `caytientrinh_hocphan`.`idcaytientrinh`='$id';");
+        $result = $this->query("SELECT `hocphan`.`mahocphan`, `tenhocphan`, `sotinchi` FROM `hocphan`, `hocphantrongcaytientrinh` WHERE `hocphantrongcaytientrinh`.`mahocphan` = `hocphan`.`mahocphan` AND `hocphantrongcaytientrinh`.`idcaytientrinh`='$id';");
         if ($result && $result->num_rows > 0)
             while ($row = $result->fetch_assoc())
                 $arr[] = $row;
@@ -25,7 +25,7 @@ class chiTietModel extends DB
     {
         if (isset($_POST['mahocphan'])) {
             $idcaytientrinh = (int) $_POST['id'];
-            $sql = "INSERT INTO `caytientrinh_hocphan` (`idcaytientrinh`, `mahocphan`) VALUES ";
+            $sql = "INSERT INTO `hocphantrongcaytientrinh` (`idcaytientrinh`, `mahocphan`) VALUES ";
             foreach ($_POST['mahocphan'] as $hp) {
                 $mahocphan = addslashes($hp);
                 $sql .= "('$idcaytientrinh', '$mahocphan'),";
@@ -43,7 +43,7 @@ class chiTietModel extends DB
         if (isset($_POST['xoa_mahocphan'])) {
             $idcaytientrinh = (int)$_POST['id'];
             $mahocphan = addslashes($_POST['xoa_mahocphan']);
-            $result = $this->query("DELETE FROM `caytientrinh_hocphan` WHERE `caytientrinh_hocphan`.`idcaytientrinh` = '$idcaytientrinh' AND `caytientrinh_hocphan`.`mahocphan` = '$mahocphan'");
+            $result = $this->query("DELETE FROM `hocphantrongcaytientrinh` WHERE `hocphantrongcaytientrinh`.`idcaytientrinh` = '$idcaytientrinh' AND `hocphantrongcaytientrinh`.`mahocphan` = '$mahocphan'");
             if ($result)
                 header("Location: " . DOMAIN . "chitiet/index&msg=xoathanhcong&id=" . $idcaytientrinh);
             else

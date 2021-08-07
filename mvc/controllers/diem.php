@@ -16,4 +16,8 @@ class diem extends Controller
     {
         $this->model("diemModel")->sua();
     }
+    public function nhap()
+    {
+        $this->model("diemModel")->nhap();
+    }
 }

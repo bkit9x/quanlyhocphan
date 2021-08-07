@@ -169,6 +169,11 @@
                                 <i class="fa fa-pie-chart"></i><span>Thống kê</span>
                             </a>
                         </li>
+                        <li>
+                            <a href="<?= DOMAIN ?>spreadsheet/index">
+                                <i class="fa fa-file-excel-o"></i><span>Nhập điểm</span>
+                            </a>
+                        </li>
                         <li class="treeview active">
                             <a href="#">
                                 <i class="fa fa-user"></i><span>QL tài khoản</span>
