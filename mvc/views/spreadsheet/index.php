@@ -4,13 +4,13 @@
     </div>
     <!-- /.box-header -->
     <!-- form start -->
-    <form id="frm" role="form" action="<?= DOMAIN ?>taikhoan/sua" method="post" enctype="multipart/form-data">
+    <form id="frm" role="form" action="<?= DOMAIN ?>spreadsheet/nhap" method="post" enctype="multipart/form-data">
         <div class="box-body">
             <div class="form-group">
                 <label for="file">Chọn file điểm</label>
                 <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-file-text"></i></span>
-                    <input type="file" class="form-control" placeholder="Email">
+                    <input type="file" name="file" class="form-control">
                 </div>
             </div>
         </div>
@@ -20,30 +20,3 @@
         </div>
     </form>
 </div>
-<script>
-    $(function() {
-        <?php
-        if (isset($_GET['msg'])) {
-            if ($_GET['msg'] == 'thanhcong')
-                $msg = ['icon' => 'success', 'title' => 'Đã cập nhật thông tin!'];
-            elseif ($_GET['msg'] == 'loi')
-                $msg = ['icon' => 'warning', 'title' => 'Có lỗi xảy ra!'];
-            elseif ($_GET['msg'] == 'matkhaukhongdung')
-                $msg = ['icon' => 'warning', 'title' => 'Mật khẩu không đúng!'];
-
-            if ($msg) {
-        ?>
-                Swal.fire({
-                    toast: true,
-                    position: 'top-end',
-                    showConfirmButton: false,
-                    timer: 5000,
-                    icon: '<?= $msg['icon'] ?>',
-                    title: '<?= $msg['title'] ?>',
-                })
-        <?php
-            }
-        }
-        ?>
-    })
-</script>

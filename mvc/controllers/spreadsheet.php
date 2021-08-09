@@ -17,6 +17,7 @@ class spreadsheet extends Controller
     }
     public function nhap()
     {
-        $this->model("spreadSheetModel")->nhap();
+        $nhap = $this->model("spreadSheetModel")->nhap();
+        $this->view("spreadsheet/nhap", ['data' => $nhap], ["title" => "Nhập điểm", ["link" => "spreadsheet/nhap", "title" => "QL điểm"]]);
     }
 }

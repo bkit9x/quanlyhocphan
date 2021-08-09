@@ -44,8 +44,7 @@ class spreadSheetModel extends DB
     public function nhap()
     {
         $inputFileType = 'Xlsx';
-        $inputFileName = '././upload/file.xlsx';
-        $sheetname = 'Mau DT05b';
+        $inputFileName = $_FILES['file']['tmp_name'];
         $startRow = 6;
         $soluongsinhvien = 65;
         $endRow = 9 + $soluongsinhvien;
@@ -60,6 +59,7 @@ class spreadSheetModel extends DB
 
         $diem = array();
         $loi = array();
+        $thanhcong = array();
         for ($row = 9; $row <= $endRow; $row++) {
             if ($sheetData[$row][1]) {
                 $mssv = $sheetData[$row][1];
@@ -72,15 +72,16 @@ class spreadSheetModel extends DB
                         $mamon = $sheetData[5][$col - 1];
                         $mamon = explode(' ', $mamon)[0];
                         $diem[$mssv][$mamon] = $value;
-                        var_dump($value);
                         if (!$this->nhapdiemchosinhvien($mssv, $mamon, $value)) {
-                            $loi[] = array("Sinh viên $mssv môn $mamon điểm $value");
+                            $loi[] = array($mssv, $mamon, $value);
+                        } else {
+                            $thanhcong[] = array($mssv, $mamon, $value);
                         }
                     }
                 }
             }
         }
-        var_dump($loi);
+        return ['thanhcong' => $thanhcong, 'loi' => $loi];
     }
 
     public function nhapdiemchosinhvien($sinhvien, $mahocphan, $diem)

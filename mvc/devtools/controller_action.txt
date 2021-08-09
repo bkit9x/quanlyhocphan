@@ -1,0 +1,5 @@
+    public function [nameaction]()
+    {
+        $model = $this->model("[model]")->[nameaction]();
+        $this->view("[controller]/[nameaction]", ["list" => $model], ["title" => "[title]", ["link" => "[nameaction]/[nameaction]", "title" => "[title]"]]);
+    }

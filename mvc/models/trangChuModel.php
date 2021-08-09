@@ -4,49 +4,61 @@ class trangChuModel extends DB
     public function index()
     {
         $arr = array();
+        //Phòng đào tạo
         if ($_SESSION['idloaitaikhoan'] == '1') {
             $arr[] = array(
                 "bg" => "bg-aqua",
                 "text1" => "Quản lý",
                 "text2" => "Học phần",
                 "icon" => "fa fa-mortar-board",
-                "link" => "./index.php?url=hocphan/index"
+                "link" => "hocphan/index"
             );
             $arr[] = array(
                 "bg" => "bg-green",
                 "text1" => "Quản lý",
                 "text2" => "Cây tiến trình",
                 "icon" => "fa fa-code-fork",
-                "link" => "./index.php?url=caytientrinh/index"
+                "link" => "caytientrinh/index"
             );
             $arr[] = array(
                 "bg" => "bg-yellow",
                 "text1" => "Quản lý",
                 "text2" => "Chủ nhiệm",
                 "icon" => "fa fa-user",
-                "link" => "./index.php?url=chunhiem/index"
+                "link" => "chunhiem/index"
             );
             $arr[] = array(
                 "bg" => "bg-red",
                 "text1" => "Quản lý",
                 "text2" => "Tài khoản",
                 "icon" => "fa fa-shield",
-                "link" => "./index.php?url=taikhoan/index"
+                "link" => "taikhoan/index"
             );
-        } elseif ($_SESSION['idloaitaikhoan'] == '2') {
+        }
+        //Giáo viên
+        elseif ($_SESSION['idloaitaikhoan'] == '2') {
             $arr[] = array(
                 "bg" => "bg-aqua",
                 "text1" => "Quản lý",
                 "text2" => "Sinh viên",
                 "icon" => "fa fa-user",
-                "link" => "./index.php?url=sinhvien/index"
+                "link" => "sinhvien/index"
             );
+
             $arr[] = array(
                 "bg" => "bg-green",
                 "text1" => "Xem",
                 "text2" => "Thống kê",
                 "icon" => "fa fa-pie-chart",
-                "link" => "./index.php?url=thongke/index"
+                "link" => "thongke/index"
+            );
+
+            $arr[] = array(
+                "bg" => "bg-yellow",
+                "text1" => "-",
+                "text2" => "Nhập điểm",
+                "icon" => "fa fa-file-excel-o",
+                "link" => "spreadsheet/index"
             );
 
             $arr[] = array(
@@ -54,43 +66,52 @@ class trangChuModel extends DB
                 "text1" => "Quản lý",
                 "text2" => "Tài khoản",
                 "icon" => "fa fa-shield",
-                "link" => "./index.php?url=taikhoan/capnhat"
+                "link" => "taikhoan/capnhat"
             );
-        } else {
+        }
+        //Sinh viên
+        else {
+            $arr[] = array(
+                "bg" => "bg-purple",
+                "text1" => "Đăng ký",
+                "text2" => "Học phần",
+                "icon" => "fa fa-mortar-board",
+                "link" => "dangkyhocphan/chonhocky"
+            );
             $arr[] = array(
                 "bg" => "bg-aqua",
                 "text1" => "Thống kê",
                 "text2" => "Tổng quát",
                 "icon" => "fa fa-dashboard",
-                "link" => "./index.php?url=thongke/tongquat"
+                "link" => "thongke/tongquat"
             );
             $arr[] = array(
                 "bg" => "bg-green",
                 "text1" => "Học phần",
                 "text2" => "Chưa học",
                 "icon" => "fa fa-calendar-o",
-                "link" => "./index.php?url=thongke/chuahoc"
+                "link" => "thongke/chuahoc"
             );
             $arr[] = array(
                 "bg" => "bg-yellow",
                 "text1" => "Học phần",
                 "text2" => "Đã học",
                 "icon" => "fa fa-calendar-check-o",
-                "link" => "./index.php?url=thongke/dahoc"
+                "link" => "thongke/dahoc"
             );
             $arr[] = array(
                 "bg" => "bg-blue",
                 "text1" => "Học phần",
                 "text2" => "Chưa đạt",
                 "icon" => "fa fa-calendar-times-o",
-                "link" => "./index.php?url=thongke/chuadat"
+                "link" => "thongke/chuadat"
             );
             $arr[] = array(
                 "bg" => "bg-red",
                 "text1" => "Quản lý",
                 "text2" => "Tài khoản",
                 "icon" => "fa fa-shield",
-                "link" => "./index.php?url=taikhoan/capnhat"
+                "link" => "taikhoan/capnhat"
             );
         }
         return $arr;

@@ -142,6 +142,11 @@
                                 <i class="fa fa-user-md"></i><span>QL chủ nhiệm</span>
                             </a>
                         </li>
+                        <li>
+                            <a href="<?= DOMAIN ?>hocky/index">
+                                <i class="fa fa-calendar"></i><span>QL học kỳ</span>
+                            </a>
+                        </li>
                         <li class="treeview active">
                             <a href="#">
                                 <i class="fa fa-user"></i><span>QL tài khoản</span>
@@ -190,6 +195,11 @@
                         <?php #Sinh viên# 
                         ?>
                     <?php else : ?>
+                        <li>
+                            <a href="<?= DOMAIN ?>dangkyhocphan/chonhocky">
+                                <i class="glyphicon glyphicon-list-alt"></i><span>Đăng ký học phần</span>
+                            </a>
+                        </li>
                         <li class="treeview active">
                             <a href="#">
                                 <i class="fa fa-pie-chart"></i><span>Thống kê</span>

@@ -1,0 +1,10 @@
+<?php
+class [controller] extends Controller
+{
+    public function __construct()
+    {
+        if ($this->quyen() != '1')
+            header('Location: ' . DOMAIN);
+    }
+    [action]
+}

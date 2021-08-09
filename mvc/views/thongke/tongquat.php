@@ -60,8 +60,12 @@
                 <span class="info-box-number">
                     <?php
                     $dtb = 0;
-                    foreach ($data['list']['diem'] as $diem) $dtb += $diem['diem'];
-                    echo round($dtb / $data['list']['dahoc']['tinchi'], 2); ?></span>
+                    if ($data['list']['dahoc']['tinchi'] > 0) {
+                        foreach ($data['list']['diem'] as $diem) $dtb += $diem['diem'];
+                        echo round($dtb / $data['list']['dahoc']['tinchi'], 2);
+                    } else
+                        echo 0;
+                    ?></span>
             </div>
             <!-- /.info-box-content -->
         </div>
