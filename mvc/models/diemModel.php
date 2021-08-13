@@ -6,10 +6,11 @@ class diemModel extends DB
 {
     public function index()
     {
-        $taikhoangv = $_SESSION['taikhoan'];
+        $hocky = (int) $_GET['hocky'];
         $sinhvien = addslashes($_GET['sv']);
         $arr = array();
-        $result = $this->query("SELECT `hocphan`.`mahocphan`, `hocphan`.`tenhocphan`, `hocphan`.`sotinchi` FROM `hocphan`, `chunhiem`, `hocphantrongcaytientrinh`, `caytientrinhsinhvien` WHERE `caytientrinhsinhvien`.`idsinhvien` = `chunhiem`.`idsinhvien` AND `hocphantrongcaytientrinh`.`mahocphan` = `hocphan`.`mahocphan` AND `hocphantrongcaytientrinh`.`idcaytientrinh` = `caytientrinhsinhvien`.`idcaytientrinh` AND `caytientrinhsinhvien`.`idsinhvien`='$sinhvien' AND `chunhiem`.`idgiaovien`='$taikhoangv';");
+        $result = $this->query("SELECT DISTINCT `hocphan`.`mahocphan`, `hocphan`.`tenhocphan`, `hocphan`.`sotinchi` FROM `hocphan`, `dangkyhocphan`, `taikhoan` WHERE `dangkyhocphan`.`idhocphan` = `hocphan`.`mahocphan` AND `dangkyhocphan`.`idsinhvien`='$sinhvien' AND `dangkyhocphan`.`idhocky`='$hocky';");
+
         if ($result && $result->num_rows > 0)
             while ($row = $result->fetch_assoc()) {
                 $diem = $this->query("SELECT `diem` FROM `diem` WHERE `idhocphan`='" . $row['mahocphan'] . "' AND `idsinhvien`='$sinhvien'");
@@ -18,6 +19,15 @@ class diemModel extends DB
                     $row['diem'] = $diem->fetch_assoc()['diem'];
                 $arr[] = $row;
             }
+        return $arr;
+    }
+    public function chonhocky()
+    {
+        $arr = array();
+        $result = $this->query("SELECT * FROM `hocky`");
+        if ($result && $result->num_rows > 0)
+            while ($row = $result->fetch_assoc())
+                $arr[] = $row;
         return $arr;
     }
 
@@ -37,40 +47,5 @@ class diemModel extends DB
             else
                 header("Location: " . DOMAIN . "diem/index&msg=sualoi&sv=" . $sinhvien);
         }
-    }
-
-    public function nhap()
-    {
-        $inputFileType = 'Xlsx';
-        $inputFileName = __DIR__ . '/upload/file.xlsx';
-        $sheetname = 'Mau DT05b';
-        $startRow = 6;
-        $endRow = 76;
-
-        $filterSubset = new MyReadFilter($startRow, $endRow);
-
-        $reader = IOFactory::createReader($inputFileType);
-        $reader->setReadFilter($filterSubset);
-        $spreadsheet = $reader->load($inputFileName);
-
-        $sheetData = $spreadsheet->getActiveSheet()->toArray();
-
-        $diem = array();
-        for ($row = 9; $row <= $endRow; $row++) {
-            if ($sheetData[$row][1]) {
-                $mssv = $sheetData[$row][1];
-                $diem[$mssv] = array();
-
-                for ($col = 3; $col < count($sheetData[$row]) - 1; $col++) {
-                    $value = $sheetData[$row][$col];
-                    if (is_numeric($value)) {
-                        $mamon = $sheetData[5][$col - 1];
-                        $mamon = explode(' ', $mamon)[0];
-                        $diem[$mssv][$mamon] = $value;
-                    }
-                }
-            }
-        }
-        var_dump($diem);
     }
 }

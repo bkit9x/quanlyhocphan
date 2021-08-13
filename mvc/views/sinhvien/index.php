@@ -21,7 +21,7 @@
                         <td><?= $sinhvien['sinhvien']; ?></td>
                         <td><?= $sinhvien['tencaytientrinh']; ?></td>
                         <td><?= $sinhvien['tenkhoa']; ?></td>
-                        <td><button type="button" class="btn btn-primary btn-sm" data-toggle="modal" id="btn-modal-sua" data-idsinhvien="<?= $sinhvien['idsinhvien']; ?>" data-idcaytientrinh="<?= $sinhvien['idcaytientrinh']; ?>" data-tensinhvien="<?= $sinhvien['sinhvien']; ?>" data-target="#modal-sua"> <i class="fa fa-pencil-square-o"></i> Đổi cây tiến trình</button> <a href="<?= DOMAIN ?>diem/index&sv=<?= $sinhvien['idsinhvien']; ?>" class="btn btn-success btn-sm"><i class="fa fa-mail-forward"></i> Nhập điểm</a></td>
+                        <td><button type="button" class="btn btn-primary btn-sm" data-toggle="modal" id="btn-modal-sua" data-idsinhvien="<?= $sinhvien['idsinhvien']; ?>" data-idcaytientrinh="<?= $sinhvien['idcaytientrinh']; ?>" data-tensinhvien="<?= $sinhvien['sinhvien']; ?>" data-target="#modal-sua"> <i class="fa fa-pencil-square-o"></i> Đổi cây tiến trình</button> <a href="<?= DOMAIN ?>diem/chonhocky&sv=<?= $sinhvien['idsinhvien']; ?>" class="btn btn-success btn-sm"><i class="fa fa-mail-forward"></i> Nhập điểm</a></td>
                     </tr>
                 <?php endforeach; ?>
             </tbody>
@@ -121,7 +121,7 @@
                     toast: true,
                     position: 'top-end',
                     showConfirmButton: false,
-                    timer: 5000,
+                    timer: 3000,
                     icon: '<?= $msg['icon'] ?>',
                     title: '<?= $msg['title'] ?>',
                 })

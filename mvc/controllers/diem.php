@@ -11,6 +11,11 @@ class diem extends Controller
         $model = $this->model("diemModel")->index();
         $this->view("diem/index", ["list" => $model], ["title" => "Quản lý điểm", ["link" => "diem/index", "title" => "QL điểm"]]);
     }
+    public function chonhocky()
+    {
+        $model = $this->model("diemModel")->chonhocky();
+        $this->view("diem/chonhocky", ["list" => $model], ["title" => "Chọn học kỳ", ["link" => "diem/chonhocky", "title" => "Chọn học kỳ"]]);
+    }
 
     public function sua()
     {

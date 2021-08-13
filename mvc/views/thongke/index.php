@@ -28,9 +28,9 @@
                             <a href="<?= DOMAIN ?>thongke/dahoc&sv=<?= $sinhvien['idsinhvien']; ?>" class="btn btn-sm btn-success">
                                 <i class="fa fa-check"></i> Đã học
                             </a>
-                            <a href="<?= DOMAIN ?>thongke/chuahoc&sv=<?= $sinhvien['idsinhvien']; ?>" class="btn btn-sm btn-warning">
+                            <!-- <a href="<?= DOMAIN ?>thongke/chuahoc&sv=<?= $sinhvien['idsinhvien']; ?>" class="btn btn-sm btn-warning">
                                 <i class="fa fa-circle-o"></i> Chưa học
-                            </a>
+                            </a> -->
                             <a href="<?= DOMAIN ?>thongke/chuadat&sv=<?= $sinhvien['idsinhvien']; ?>" class="btn btn-sm btn-danger">
                                 <i class="fa fa-times"></i> Chưa đạt
                             </a>

@@ -24,12 +24,12 @@
 
     <div class="col-md-3 col-sm-6 col-xs-6">
         <div class="info-box">
-            <span class="info-box-icon bg-aqua"><i class="fa fa-circle-o"></i></span>
+            <span class="info-box-icon bg-red"><i class="fa fa-times"></i></span>
             <div class="info-box-content">
                 <span class="info-box-text">
-                    <h4>Chưa học</h4>
+                    <h4>Chưa đạt</h4>
                 </span>
-                <span class="info-box-number"><?= $data['list']['chuahoc']['tinchi'] ?: 0; ?><small> tín chỉ</small></span>
+                <span class="info-box-number"><?= $data['list']['chuadat']['tinchi'] ?: 0; ?><small> tín chỉ</small></span>
             </div>
             <!-- /.info-box-content -->
         </div>
@@ -52,7 +52,7 @@
 
     <div class="col-md-3 col-sm-6 col-xs-6">
         <div class="info-box">
-            <span class="info-box-icon bg-red"><i class="fa fa-align-center"></i></span>
+            <span class="info-box-icon bg-blue"><i class="fa fa-align-center"></i></span>
             <div class="info-box-content">
                 <span class="info-box-text">
                     <h4>ĐTB tích lũy</h4>
@@ -61,7 +61,7 @@
                     <?php
                     $dtb = 0;
                     if ($data['list']['dahoc']['tinchi'] > 0) {
-                        foreach ($data['list']['diem'] as $diem) $dtb += $diem['diem'];
+                        foreach ($data['list']['diem'] as $diem) $dtb += $diem['diem'] * $diem['tinchi'];
                         echo round($dtb / $data['list']['dahoc']['tinchi'], 2);
                     } else
                         echo 0;
@@ -73,7 +73,7 @@
     </div>
 </div>
 <div class="row">
-    <div class="col-md-8">
+    <div class="col-md-12">
         <!-- LINE CHART -->
         <div class="box box-primary">
             <div class="box-header with-border">
@@ -95,8 +95,8 @@
         <!-- /.box -->
     </div>
 
-    <div class="col-md-4">
-        <!-- LINE CHART -->
+    <!-- LINE CHART -->
+    <!-- <div class="col-md-0">
         <div class="box box-primary">
             <div class="box-header with-border">
                 <h3 class="box-title">Biểu đồ học phần</h3>
@@ -112,10 +112,9 @@
                     <canvas id="pieChart" style="height:250px"></canvas>
                 </div>
             </div>
-            <!-- /.box-body -->
         </div>
-        <!-- /.box -->
-    </div>
+    </div> -->
+
 </div>
 
 <script>
@@ -211,7 +210,7 @@
                 value: <?= $data['list']['dahoc']['mon']; ?>,
                 color: '#00a65a',
                 highlight: '#00a65a',
-                label: 'Môn đã học'
+                label: 'Môn đã tích lũy'
             },
             {
                 value: <?= $data['list']['chuahoc']['mon']; ?>,
