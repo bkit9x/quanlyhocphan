@@ -3,7 +3,7 @@ class diem extends Controller
 {
     public function __construct()
     {
-        if ($this->quyen() != '2' || !isset($_GET['sv']))
+        if ($this->quyen() != '2' && $this->quyen() != '3')
             header('Location: ' . DOMAIN);
     }
     public function index()

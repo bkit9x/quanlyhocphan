@@ -3,7 +3,7 @@
     <div class="box-body">
         <div class="row">
             <form method="get" action="<?= DOMAIN ?>diem/index">
-                <input type="hidden" name="sv" value="<?= $_GET['sv']; ?>">
+                <input type="hidden" name="sv" value="<?= (isset($_GET['sv']) ?: ''); ?>">
                 <div class="col-xs-10">
                     <div class="form-group">
                         <label>Học kỳ:</label>

@@ -200,6 +200,11 @@
                                 <i class="glyphicon glyphicon-list-alt"></i><span>Đăng ký học phần</span>
                             </a>
                         </li>
+                        <li>
+                            <a href="<?= DOMAIN ?>diem/chonhocky">
+                                <i class="fa fa-asterisk"></i><span>Nhập điểm</span>
+                            </a>
+                        </li>
                         <li class="treeview active">
                             <a href="#">
                                 <i class="fa fa-pie-chart"></i><span>Thống kê</span>
@@ -207,7 +212,7 @@
                             </a>
                             <ul class="treeview-menu">
                                 <li><a href="<?= DOMAIN ?>thongke/tongquat"><i class="fa fa-circle-o"></i> Tổng quát</a></li>
-                                <!-- <li><a href="<?= DOMAIN ?>thongke/chuahoc"><i class="fa fa-circle-o"></i> Học phần chưa học</a></li> -->
+                                <li><a href="<?= DOMAIN ?>thongke/chuahoc"><i class="fa fa-circle-o"></i> Học phần chưa học</a></li>
                                 <li><a href="<?= DOMAIN ?>thongke/dahoc"><i class="fa fa-circle-o"></i> Học phần đã học</a></li>
                                 <li><a href="<?= DOMAIN ?>thongke/chuadat"><i class="fa fa-circle-o"></i> Học phần chưa đạt</a></li>
                             </ul>

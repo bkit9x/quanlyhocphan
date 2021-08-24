@@ -79,19 +79,26 @@ class trangChuModel extends DB
                 "link" => "dangkyhocphan/chonhocky"
             );
             $arr[] = array(
+                "bg" => "bg-yellow",
+                "text1" => "-",
+                "text2" => "Nhập điểm",
+                "icon" => "fa fa-file-excel-o",
+                "link" => "diem/chonhocky"
+            );
+            $arr[] = array(
                 "bg" => "bg-aqua",
                 "text1" => "Thống kê",
                 "text2" => "Tổng quát",
                 "icon" => "fa fa-dashboard",
                 "link" => "thongke/tongquat"
             );
-            // $arr[] = array(
-            //     "bg" => "bg-green",
-            //     "text1" => "Học phần",
-            //     "text2" => "Chưa học",
-            //     "icon" => "fa fa-calendar-o",
-            //     "link" => "thongke/chuahoc"
-            // );
+            $arr[] = array(
+                "bg" => "bg-green",
+                "text1" => "Học phần",
+                "text2" => "Chưa học",
+                "icon" => "fa fa-calendar-o",
+                "link" => "thongke/chuahoc"
+            );
             $arr[] = array(
                 "bg" => "bg-green",
                 "text1" => "Học phần",

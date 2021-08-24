@@ -18,7 +18,13 @@ class DB
     }
     public function query($query)
     {
-        file_put_contents(__DIR__ . '/sql.txt', $query . "\n", FILE_APPEND);
         return $this->con->query($query);
+    }
+    public function quyen()
+    {
+        if (isset($_SESSION['idloaitaikhoan']))
+            return $_SESSION['idloaitaikhoan'];
+        else
+            return NULL;
     }
 }

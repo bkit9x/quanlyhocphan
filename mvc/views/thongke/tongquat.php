@@ -73,7 +73,7 @@
     </div>
 </div>
 <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-6">
         <!-- LINE CHART -->
         <div class="box box-primary">
             <div class="box-header with-border">
@@ -96,7 +96,7 @@
     </div>
 
     <!-- LINE CHART -->
-    <!-- <div class="col-md-0">
+    <div class="col-md-6">
         <div class="box box-primary">
             <div class="box-header with-border">
                 <h3 class="box-title">Biểu đồ học phần</h3>
@@ -113,7 +113,7 @@
                 </div>
             </div>
         </div>
-    </div> -->
+    </div>
 
 </div>
 

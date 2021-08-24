@@ -1,3 +1,8 @@
+<style>
+    .khac {
+        color: red;
+    }
+</style>
 <div class="box box-primary">
     <div class="box-header">
         <h3 class="box-title">Danh sách học phần</h3>
@@ -10,18 +15,32 @@
                     <th>Mã học phần</th>
                     <th>Tên học phần</th>
                     <th>Số tín chỉ</th>
-                    <th>Điểm</th>
+                    <th>Điểm giáo viên</th>
+                    <th>Điểm sinh viên</th>
                     <th>Thao tác</th>
                 </tr>
             </thead>
             <tbody>
                 <?php foreach ($data['list'] as $hocphan) : ?>
-                    <tr>
-                        <td><?= $hocphan['mahocphan']; ?></td>
-                        <td><?= $hocphan['tenhocphan']; ?></td>
-                        <td><?= $hocphan['sotinchi']; ?></td>
-                        <td><?= $hocphan['diem']; ?></td>
-                        <td><button type="button" class="btn btn-success btn-sm" data-toggle="modal" id="btn-modal-sua" data-mahocphan="<?= $hocphan['mahocphan']; ?>" data-tenhocphan="<?= $hocphan['tenhocphan']; ?>" data-diem="<?= $hocphan['diem']; ?>" data-target="#modal-sua"> <i class="fa fa-pencil-square-o"></i> Sửa điểm</button></td>
+                    <?php
+                    if (isset($hocphan['diem']['giaovien']['diem']) && isset($hocphan['diem']['sinhvien']['diem'])) {
+                        if ($hocphan['diem']['giaovien']['diem'] != $hocphan['diem']['sinhvien']['diem'])
+                            echo '<tr class="khac">';
+                        else
+                            echo '<tr>';
+                    } else
+                        echo '<tr>';
+                    ?>
+                    <td><?= $hocphan['mahocphan']; ?></td>
+                    <td><?= $hocphan['tenhocphan']; ?></td>
+                    <td><?= $hocphan['sotinchi']; ?></td>
+                    <td>
+                        <?= @$hocphan['diem']['giaovien']['diem']; ?>
+                    </td>
+                    <td>
+                        <?= @$hocphan['diem']['sinhvien']['diem']; ?>
+                    </td>
+                    <td><button type="button" class="btn btn-success btn-sm" data-toggle="modal" id="btn-modal-sua" data-mahocphan="<?= $hocphan['mahocphan']; ?>" data-tenhocphan="<?= $hocphan['tenhocphan']; ?>" data-diem="<?= $hocphan['diem']; ?>" data-target="#modal-sua"> <i class="fa fa-pencil-square-o"></i> Sửa điểm</button></td>
                     </tr>
                 <?php endforeach; ?>
             </tbody>
@@ -50,7 +69,7 @@
                 <h4 class="modal-title">Chỉnh sửa điểm</h4>
             </div>
             <div class="modal-body">
-                <form id="frm_sua" role="form" method="post" action="<?= DOMAIN ?>diem/sua&sv=<?= $_GET['sv']; ?>">
+                <form id="frm_sua" role="form" method="post" action="<?= DOMAIN ?>diem/sua&sv=<?= $_GET['sv']; ?>&hocky=<?= $_GET['hocky']; ?>">
                     <div class="form-group">
                         <label>Tên học phần</label>
                         <input type="hidden" name="sua_mahocphan" id="sua_mahocphan">
@@ -59,7 +78,7 @@
 
                     <div class="form-group">
                         <label>Số điểm</label>
-                        <input type="number" name="sua_diem" id="sua_diem" class="form-control" placeholder="Nhập số điểm..." min="0" max="10" step="0.01" required>
+                        <input type="number" name="sua_diem" id="sua_diem" class="form-control" placeholder="Nhập số điểm..." min="0" max="4" step="0.5" required>
                     </div>
 
                 </form>
