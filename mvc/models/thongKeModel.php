@@ -11,7 +11,7 @@ class thongKeModel extends DB
 
         $arr['chuahoc']['mon'] = 0;
         $arr['chuahoc']['tinchi'] = 0;
-        $query_chuahoc = $this->query("SELECT COUNT(*) as `count`, SUM(`hocphan`.`sotinchi`) as `sum` FROM `hocphan`, `hocphantrongcaytientrinh`, `caytientrinhsinhvien` WHERE `hocphantrongcaytientrinh`.`mahocphan` = `hocphan`.`mahocphan` AND `hocphantrongcaytientrinh`.`idcaytientrinh` = `caytientrinhsinhvien`.`idcaytientrinh` AND `caytientrinhsinhvien`.`idsinhvien`='$sinhvien' AND `hocphan`.`mahocphan` NOT IN(SELECT `diem`.`idhocphan` FROM `diem` WHERE `diem`.`idsinhvien`='$sinhvien');");
+        $query_chuahoc = $this->query("SELECT COUNT(*) as `count`, SUM(`hocphan`.`sotinchi`) as `sum` FROM `hocphan`, `hocphantrongcaytientrinh`, `caytientrinhsinhvien` WHERE `hocphantrongcaytientrinh`.`mahocphan` = `hocphan`.`mahocphan` AND `hocphantrongcaytientrinh`.`idcaytientrinh` = `caytientrinhsinhvien`.`idcaytientrinh` AND `caytientrinhsinhvien`.`idsinhvien`='$sinhvien' AND `hocphan`.`mahocphan` NOT IN(SELECT `idhocphan` FROM `dangkyhocphan` WHERE `idsinhvien`='$sinhvien');");
         if ($query_chuahoc && $query_chuahoc->num_rows > 0) {
             $row = $query_chuahoc->fetch_assoc();
             $arr['chuahoc']['mon'] = $row['count'];
@@ -50,7 +50,7 @@ class thongKeModel extends DB
         $_GET['sv'] = isset($_GET['sv']) ? $_GET['sv'] : $_SESSION['taikhoan'];
         $sinhvien = addslashes($_GET['sv']);
         $arr = array();
-        $result = $this->query("SELECT `hocphan`.`mahocphan`, `hocphan`.`tenhocphan`, `hocphan`.`sotinchi`, `hocphan`.`hocphantienquyet` as `mahocphantienquyet` FROM `hocphan`, `hocphantrongcaytientrinh`, `caytientrinhsinhvien` WHERE `hocphantrongcaytientrinh`.`mahocphan` = `hocphan`.`mahocphan` AND `hocphantrongcaytientrinh`.`idcaytientrinh` = `caytientrinhsinhvien`.`idcaytientrinh` AND `caytientrinhsinhvien`.`idsinhvien`='$sinhvien' AND `hocphan`.`mahocphan` NOT IN(SELECT `diem`.`idhocphan` FROM `diem` WHERE `diem`.`idsinhvien`='$sinhvien');");
+        $result = $this->query("SELECT `hocphan`.`mahocphan`, `hocphan`.`tenhocphan`, `hocphan`.`sotinchi`, `hocphan`.`hocphantienquyet` as `mahocphantienquyet` FROM `hocphan`, `hocphantrongcaytientrinh`, `caytientrinhsinhvien` WHERE `hocphantrongcaytientrinh`.`mahocphan` = `hocphan`.`mahocphan` AND `hocphantrongcaytientrinh`.`idcaytientrinh` = `caytientrinhsinhvien`.`idcaytientrinh` AND `caytientrinhsinhvien`.`idsinhvien`='$sinhvien' AND `hocphan`.`mahocphan` NOT IN(SELECT `idhocphan` FROM `dangkyhocphan` WHERE `idsinhvien`='$sinhvien');");
         if ($result && $result->num_rows > 0) {
             while ($row = $result->fetch_assoc()) {
                 if ($row['mahocphantienquyet'] != NULL) {
