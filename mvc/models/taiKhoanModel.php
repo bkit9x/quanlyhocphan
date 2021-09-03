@@ -90,15 +90,24 @@ class taiKhoanModel extends DB
                 $loaitaikhoan = addslashes($_POST['loaitaikhoan']);
                 $doiloai = ", `loaitaikhoan` = '$loaitaikhoan'";
             }
-            if (isset($_POST['matkhau']) && $_POST['matkhau'] != '' && isset($_POST['matkhaumoi']) && $_POST['matkhaumoi'] != '') {
-                $kt = $this->query("SELECT hoten FROM `taikhoan` WHERE `taikhoan` = '$taikhoan' AND `matkhau` = '$matkhau'");
-                if ($kt && $kt->num_rows > 0)
-                    $sql = "UPDATE `taikhoan` SET `matkhau` = '$matkhaumoi', `hoten` = '$hoten'$doiloai WHERE `taikhoan`.`taikhoan` = '$taikhoan'";
-                else
-                    header("Location: " . DOMAIN . "taikhoan/capnhat?msg=matkhaukhongdung&u=" . $taikhoan);
-            } else
-                $sql = "UPDATE `taikhoan` SET `hoten` = '$hoten'$doiloai WHERE `taikhoan`.`taikhoan` = '$taikhoan'";
 
+            if (isset($_POST['matkhaumoi']) && $_POST['matkhaumoi'] != '') {
+
+                if ($taikhoan != $_SESSION['taikhoan']) {
+                    $sql = "UPDATE `taikhoan` SET `matkhau` = '$matkhaumoi', `hoten` = '$hoten'$doiloai WHERE `taikhoan`.`taikhoan` = '$taikhoan'";
+                } else {
+                    if (isset($_POST['matkhau']) && $_POST['matkhau'] != '') {
+                        $kt = $this->query("SELECT hoten FROM `taikhoan` WHERE `taikhoan` = '$taikhoan' AND `matkhau` = '$matkhau'");
+                        if ($kt && $kt->num_rows > 0)
+                            $sql = "UPDATE `taikhoan` SET `matkhau` = '$matkhaumoi', `hoten` = '$hoten'$doiloai WHERE `taikhoan`.`taikhoan` = '$taikhoan'";
+                        else
+                            header("Location: " . DOMAIN . "taikhoan/capnhat?msg=matkhaukhongdung&u=" . $taikhoan);
+                    } else
+                        header("Location: " . DOMAIN . "taikhoan/capnhat?msg=matkhaukhongdung&u=" . $taikhoan);
+                }
+            } else {
+                header("Location: " . DOMAIN . "taikhoan/capnhat?msg=matkhaukhongdung&u=" . $taikhoan);
+            }
             $result = $this->query($sql);
             if ($result)
                 header("Location: " . DOMAIN . "taikhoan/capnhat?msg=thanhcong&u=" . $taikhoan);

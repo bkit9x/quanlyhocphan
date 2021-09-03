@@ -11,10 +11,13 @@
         <input type="hidden" id="taikhoan" name="taikhoan">
         <input type="text" class="form-control" id="hoten" name="hoten" placeholder="Nhập họ và tên ..." value="<?= $data['taikhoan']['hoten'] ?>" required>
       </div>
-      <div class="form-group">
-        <label for="matkhau">Mật khẩu</label>
-        <input type="password" class="form-control" id="matkhau" name="matkhau" placeholder="Nhập mật khẩu hiện tại ...">
-      </div>
+      <?php
+      if (@$_GET['u'] == $_SESSION['taikhoan']) : ?>
+        <div class="form-group">
+          <label for="matkhau">Mật khẩu</label>
+          <input type="password" class="form-control" id="matkhau" name="matkhau" placeholder="Nhập mật khẩu hiện tại ...">
+        </div>
+      <?php endif; ?>
       <div class="form-group">
         <label for="matkhaumoi">Mật khẩu mới</label>
         <input type="password" class="form-control" id="matkhaumoi" name="matkhaumoi" placeholder="Nhập mật khẩu mới...">
